@@ -71,11 +71,12 @@ class UserController extends Controller
 
     public function changeSettings(Request $request)
     {
+        $user = auth()->guard('web')->user();
         $rules = [
             'current' => [
                 'required',
-                function ($attribute, $value, $fail) {
-                    $current_password = auth()->user()->password;
+                function ($attribute, $value, $fail) use($user) {
+                    $current_password = $user->password;
                     if (!Hash::check($value, $current_password)) {
                         $fail('This not the ' . $attribute . ' password');
                     }
@@ -92,7 +93,6 @@ class UserController extends Controller
         ];
 
         $request->validate($rules, [], $attributes);
-        $user = auth()->user();
 
         $user->password = Hash::make($request->password);
         $result = $user->save();

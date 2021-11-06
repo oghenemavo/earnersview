@@ -17,11 +17,16 @@
                 <label class="form-label" for="default-01">Email</label>
             </div>
             <div class="form-control-wrap">
-                <input type="text" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                <input type="email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block">Request Password Reset</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Request Password Reset</button>
         </div>
     </form>
 </div>

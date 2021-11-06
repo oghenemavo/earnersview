@@ -53,4 +53,11 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function getInitialsAttribute()
+    {
+        $split = explode(' ', $this->attributes['name']);
+        return strtoupper($split[0][0]) . strtoupper($split[1][0]);
+    }
+    
 }

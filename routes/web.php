@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\User\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,22 +64,31 @@ Route::name('user.')->group(function() {
  */
 Route::prefix('admin')->group(function() {
     Route::name('admin.')->group(function() {
-        Route::middleware(['guest:admin'])->group(function() {
+        Route::middleware(['guest:admin', 'prevent_cached_history'])->group(function() {
             Route::get('/login', [AuthController::class, 'login'])->name('login');
             Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
         });
     
-        Route::middleware(['auth:admin'])->group(function() {
-            Route::get('dashbord', function () {
-                // return view('welcome');
-                echo 'hello world';
-            })->name('dashboard');
+        Route::middleware(['auth:admin', 'prevent_cached_history'])->group(function() {
+            Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+            Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+            Route::get('settings', [AdminController::class, 'settings'])->name('settings');
+            Route::put('update/password', [AdminController::class, 'updatePassword'])->name('update.password');
+            Route::put('update/email', [AdminController::class, 'emailPassword'])->name('update.email');
+            
+            Route::get('manage/users', [AdminController::class, 'users'])->name('users');
+            Route::put('suspend/user', [AdminController::class, 'suspendUser'])->name('suspend.user');
+            Route::put('activate/user', [AdminController::class, 'activateUser'])->name('activate.user');
         });
     });
 });
 
 
 Route::prefix('ajax')->name('ajax.')->group(function() {
-    Route::get('validate/email', [AjaxController::class, 'unique_email'])->name('validate.email');
-    Route::post('validate/bank_account', [AjaxController::class, 'check_account'])->name('validate.bank_account');
+    Route::get('validate/email', [AjaxController::class, 'uniqueEmail'])->name('validate.email');
+    Route::post('validate/bank_account', [AjaxController::class, 'checkAccount'])->name('validate.bank_account');
+
+    Route::prefix('get')->group(function() {
+        Route::get('all/users', [AjaxController::class, 'allUsers'])->name('get.all.users');
+    });
 });

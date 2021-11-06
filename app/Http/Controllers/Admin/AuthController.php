@@ -28,4 +28,14 @@ class AuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
+
+    public function logout(Request $request) 
+    {
+        auth()->guard('admin')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.login');
+    }
 }

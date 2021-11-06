@@ -42,4 +42,11 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function getInitialsAttribute()
+    {
+        $split = explode(' ', $this->attributes['name']);
+        return strtoupper($split[0][0]) . strtoupper($split[1][0]);
+    }
+
 }
