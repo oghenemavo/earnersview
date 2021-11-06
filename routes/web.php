@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +30,32 @@ Route::get('contact', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+/**
+ * User Routes
+ */
+Route::name('user.')->group(function() {
+    Route::middleware(['guest'])->group(function() {
+
+    });
+
+    Route::middleware(['auth'])->group(function() {
+        Route::view('home', 'user.dashboard.index')->name('dashboard');
+
+        Route::get('settings', [UserController::class, 'settings'])->name('settings');
+        Route::put('change/settings', [UserController::class, 'changeSettings'])->name('change.settings');
+        
+        Route::get('profile', [UserController::class, 'profile'])->name('profile');
+        Route::put('update/profile', [UserController::class, 'updateProfile'])->name('update.profile');
+        Route::get('edit/account', [UserController::class, 'account'])->name('account');
+        Route::put('update/account', [UserController::class, 'updateAccount'])->name('update.account');
+    });
+
+});
+
+
+Route::prefix('ajax')->name('ajax.')->group(function() {
+    Route::get('validate/email', [AjaxController::class, 'unique_email'])->name('validate.email');
+});

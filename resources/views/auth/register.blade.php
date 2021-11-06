@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <form id="pms_register-form" class="pms-form"  method="POST" action="#">
+                    <form id="pms_register-form" class="pms-form"  method="POST" action="{{ route('register') }}">
                         @csrf
                         <h4>{{ __('Register') }}</h4>
 
