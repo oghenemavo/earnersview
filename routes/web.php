@@ -58,4 +58,5 @@ Route::name('user.')->group(function() {
 
 Route::prefix('ajax')->name('ajax.')->group(function() {
     Route::get('validate/email', [AjaxController::class, 'unique_email'])->name('validate.email');
+    Route::post('validate/bank_account', [AjaxController::class, 'check_account'])->name('validate.bank_account');
 });
