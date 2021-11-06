@@ -37,11 +37,11 @@ Auth::routes();
  * User Routes
  */
 Route::name('user.')->group(function() {
-    Route::middleware(['guest'])->group(function() {
+    Route::middleware(['guest', 'prevent_cached_history'])->group(function() {
 
     });
 
-    Route::middleware(['auth'])->group(function() {
+    Route::middleware(['auth', 'prevent_cached_history'])->group(function() {
         Route::view('home', 'user.dashboard.index')->name('dashboard');
 
         Route::get('settings', [UserController::class, 'settings'])->name('settings');
