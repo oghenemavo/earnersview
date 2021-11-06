@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function email_exists(string $email, $ignore_id = null)
+    public function emailExists(string $email, $ignore_id = null)
     {
         $user = static::where('email', $email)->first();
 

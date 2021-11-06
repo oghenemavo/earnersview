@@ -199,101 +199,102 @@
                     }
                 ],
             });
-        });
-
-        $('#users_table tbody').on('click', 'a.activate-user', function (e) { // activate user
-            e.preventDefault();
-
-            const dt = $.fn.DataTable.Api( $('#users_table') );
-            let dtr = dt.row( $(this).parents('tr') ); // table row
-            let data = dtr.data(); // row data
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "User would be able to have access after confirming!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, activate user!'
-            }).then(function (result) {
-                if (result.value) {
-                    $.ajax({
-                        type: 'PUT',
-                        url: "{{ route('admin.activate.user') }}",
-                        data: {
-                            "_token": `{{ csrf_token() }}`, 
-                            user_id: data.id,
-                        },
-                        success: function(response) {
-                            if (response.hasOwnProperty('success')) {
-                                dt.ajax.reload();
-                                Swal.fire('Suspended!', 'User has been activated.', 'success');
+            
+            $('#users_table tbody').on('click', 'a.activate-user', function (e) { // activate user
+                e.preventDefault();
+    
+                const dt = $.fn.DataTable.Api( $('#users_table') );
+                let dtr = dt.row( $(this).parents('tr') ); // table row
+                let data = dtr.data(); // row data
+    
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "User would be able to have access after confirming!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, activate user!'
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'PUT',
+                            url: "{{ route('admin.activate.user') }}",
+                            data: {
+                                "_token": `{{ csrf_token() }}`, 
+                                user_id: data.id,
+                            },
+                            success: function(response) {
+                                if (response.hasOwnProperty('success')) {
+                                    dt.ajax.reload();
+                                    Swal.fire('Suspended!', 'User has been activated.', 'success');
+                                }
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log( XMLHttpRequest.responseJSON.errors);
+                                console.log(XMLHttpRequest.status)
+                                console.log(XMLHttpRequest.statusText)
+                                console.log(errorThrown)
+                        
+                                // display toast alert
+                                toastr.clear();
+                                toastr.options = {
+                                    "timeOut": "7000",
+                                }
+                                NioApp.Toast('Unable to process request now.', 'error', {position: 'top-right'});
                             }
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            console.log( XMLHttpRequest.responseJSON.errors);
-                            console.log(XMLHttpRequest.status)
-                            console.log(XMLHttpRequest.statusText)
-                            console.log(errorThrown)
-                    
-                            // display toast alert
-                            toastr.clear();
-                            toastr.options = {
-                                "timeOut": "7000",
+                        });
+                        
+                    }
+                });
+            });
+    
+            $('#users_table tbody').on('click', 'a.suspend-user', function (e) { // add product to cart
+                e.preventDefault();
+    
+                const dt = $.fn.DataTable.Api( $('#users_table') );
+                let dtr = dt.row( $(this).parents('tr') ); // table row
+                let data = dtr.data(); // row data
+    
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "User won't have access after confirming!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, suspend user!'
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'PUT',
+                            url: "{{ route('admin.suspend.user') }}",
+                            data: {
+                                "_token": `{{ csrf_token() }}`, 
+                                user_id: data.id,
+                            },
+                            success: function(response) {
+                                if (response.hasOwnProperty('success')) {
+                                    dt.ajax.reload();
+                                    Swal.fire('Suspended!', 'User has been suspended.', 'success');
+                                }
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                console.log( XMLHttpRequest.responseJSON.errors);
+                                console.log(XMLHttpRequest.status)
+                                console.log(XMLHttpRequest.statusText)
+                                console.log(errorThrown)
+                        
+                                // display toast alert
+                                toastr.clear();
+                                toastr.options = {
+                                    "timeOut": "7000",
+                                }
+                                NioApp.Toast('Unable to process request now.', 'error', {position: 'top-right'});
                             }
-                            NioApp.Toast('Unable to process request now.', 'error', {position: 'top-right'});
-                        }
-                    });
-                    
-                }
+                        });
+                        
+                    }
+                });
             });
         });
 
-        $('#users_table tbody').on('click', 'a.suspend-user', function (e) { // add product to cart
-            e.preventDefault();
-
-            const dt = $.fn.DataTable.Api( $('#users_table') );
-            let dtr = dt.row( $(this).parents('tr') ); // table row
-            let data = dtr.data(); // row data
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "User won't have access after confirming!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, suspend user!'
-            }).then(function (result) {
-                if (result.value) {
-                    $.ajax({
-                        type: 'PUT',
-                        url: "{{ route('admin.suspend.user') }}",
-                        data: {
-                            "_token": `{{ csrf_token() }}`, 
-                            user_id: data.id,
-                        },
-                        success: function(response) {
-                            if (response.hasOwnProperty('success')) {
-                                dt.ajax.reload();
-                                Swal.fire('Suspended!', 'User has been suspended.', 'success');
-                            }
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            console.log( XMLHttpRequest.responseJSON.errors);
-                            console.log(XMLHttpRequest.status)
-                            console.log(XMLHttpRequest.statusText)
-                            console.log(errorThrown)
-                    
-                            // display toast alert
-                            toastr.clear();
-                            toastr.options = {
-                                "timeOut": "7000",
-                            }
-                            NioApp.Toast('Unable to process request now.', 'error', {position: 'top-right'});
-                        }
-                    });
-                    
-                }
-            });
-        });
 
         
     </script>

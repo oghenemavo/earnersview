@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
@@ -79,6 +80,15 @@ Route::prefix('admin')->group(function() {
             Route::get('manage/users', [AdminController::class, 'users'])->name('users');
             Route::put('suspend/user', [AdminController::class, 'suspendUser'])->name('suspend.user');
             Route::put('activate/user', [AdminController::class, 'activateUser'])->name('activate.user');
+            
+            // Media
+            Route::prefix('media')->name('media.')->group(function() {
+                Route::get('categories', [MediaController::class, 'categories'])->name('categories');
+                Route::get('videos', [MediaController::class, 'videos'])->name('videos');
+                Route::post('create/category', [MediaController::class, 'createCategory'])->name('create.category');
+                Route::put('edit/category/{category?}', [MediaController::class, 'editCategory'])->name('edit.category');
+            });
+
         });
     });
 });
@@ -87,8 +97,10 @@ Route::prefix('admin')->group(function() {
 Route::prefix('ajax')->name('ajax.')->group(function() {
     Route::get('validate/email', [AjaxController::class, 'uniqueEmail'])->name('validate.email');
     Route::post('validate/bank_account', [AjaxController::class, 'checkAccount'])->name('validate.bank_account');
+    Route::get('validate/category', [AjaxController::class, 'uniqueCategory'])->name('validate.media.category');
 
     Route::prefix('get')->group(function() {
         Route::get('all/users', [AjaxController::class, 'allUsers'])->name('get.all.users');
+        Route::get('all/categories', [AjaxController::class, 'allCategories'])->name('get.all.categories');
     });
 });

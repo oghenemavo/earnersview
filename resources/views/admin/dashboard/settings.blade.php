@@ -114,7 +114,6 @@
 
 
 @push('scripts')
-    <script src="{{ asset('app/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('app/js/additional-methods.min.js') }}"></script>
 
     <script>

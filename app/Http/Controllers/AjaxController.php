@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Library\Facades\FlutterwaveFacade;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class AjaxController extends Controller
         $ignore_id = $request->get('ignore_id') ?? null;
         
         $user = new User();
-        $is_valid = ! $user->email_exists($email, $ignore_id);
+        $is_valid = ! $user->emailExists($email, $ignore_id);
         echo json_encode($is_valid);
     }
     
@@ -45,4 +46,29 @@ class AjaxController extends Controller
         });
         return response()->json(['users' => $mapped_users]);
     }
+
+    public function uniqueCategory(Request $request)
+    {
+        $inp_category = $request->get('category');
+        $ignore_id = $request->get('ignore_id') ?? null;
+        
+        $category = new Category();
+        $is_valid = ! $category->categoryExists($inp_category, $ignore_id);
+        echo json_encode($is_valid);
+    }
+
+    public function allCategories()
+    {
+        $categories = Category::all();
+        // $mapped_users = $categories->map(function($item, $key) {
+        //     $data['id'] = $item->id;
+        //     $data['name'] = $item->category;
+        //     $data['slug'] = $item->slug;
+        //     $data['created_at'] = $item->created_at;
+
+        //     return $data;
+        // });
+        return response()->json(['categories' => $categories]);
+    }
+    
 }
