@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,11 +38,11 @@ Auth::routes();
  * User Routes
  */
 Route::name('user.')->group(function() {
-    Route::middleware(['guest', 'prevent_cached_history'])->group(function() {
+    Route::middleware(['guest:web', 'prevent_cached_history'])->group(function() {
 
     });
 
-    Route::middleware(['auth', 'prevent_cached_history'])->group(function() {
+    Route::middleware(['auth:web', 'prevent_cached_history'])->group(function() {
         Route::view('home', 'user.dashboard.index')->name('dashboard');
 
         Route::get('settings', [UserController::class, 'settings'])->name('settings');
@@ -53,6 +54,26 @@ Route::name('user.')->group(function() {
         Route::put('update/account', [UserController::class, 'updateAccount'])->name('update.account');
     });
 
+});
+
+
+/**
+ * Admin Routes
+ */
+Route::prefix('admin')->group(function() {
+    Route::name('admin.')->group(function() {
+        Route::middleware(['guest:admin'])->group(function() {
+            Route::get('/login', [AuthController::class, 'login'])->name('login');
+            Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+        });
+    
+        Route::middleware(['auth:admin'])->group(function() {
+            Route::get('dashbord', function () {
+                // return view('welcome');
+                echo 'hello world';
+            })->name('dashboard');
+        });
+    });
 });
 
 
