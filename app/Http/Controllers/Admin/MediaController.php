@@ -47,6 +47,7 @@ class MediaController extends Controller
         $category->category = $request->category;
         $category->slug = Str::of($request->category)->slug('-');
 
+
         if ($category->save()) {
             return response()->json(['success' => true]);
         }

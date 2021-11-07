@@ -10,59 +10,57 @@
                         <div class="owl-carousel owl-loaded owl-drag" data-dots="false" data-nav="true"
                             data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1"
                             data-autoplay="true" data-loop="true" data-margin="30">
-                            <div class="item" style="background: url('images/background/asset-9.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>Rebuneka the doll</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                R </span>
-                                                        </li>
-                                                        <li>1hr 44 mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <span class="text">Play Now</span>
-                                                        </a>
+                            @foreach($videos as $video)
+                                <div class="item" style="background: url('{{ asset('cover/' . $video->cover) }}')">
+                                    <div class="gen-movie-contain h-100">
+                                        <div class="container h-100">
+                                            <div class="row align-items-center h-100">
+                                                <div class="col-xl-6">
+                                                    <div class="gen-tag-line"><span></span></div>
+                                                    <div class="gen-movie-info">
+                                                        <h3>{{ $video->title }}</h3>
                                                     </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Watch Trailer</span>
-                                                        </a>
+                                                    <div class="gen-movie-meta-holder">
+                                                        <ul>
+                                                            <li class="gen-sen-rating">
+                                                                <span>
+                                                                    R </span>
+                                                            </li>
+                                                            <li>1hr 44 mins</li>
+                                                            <li> <img src="{{ asset('cover/' . $video->cover) }}" alt="streamlab-image">
+                                                                <span>
+                                                                    0 </span>
+                                                            </li>
+                                                            <li>
+                                                                2018
+                                                            </li>
+                                                            <li>
+                                                                <a href="action.html"><span>Action</span></a>
+                                                            </li>
+                                                        </ul>
+                                                        <p>{{ strip_tags(htmlspecialchars_decode($video->description)) }}</p>
+                                                    </div>
+                                                    <div class="gen-movie-action">
+                                                        <div class="gen-btn-container button-1">
+                                                            <a href="single-movie.html" class="gen-button">
+                                                                <span class="text">Play Now</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="gen-btn-container button-2">
+                                                            <a href="{{ $video->url }}"
+                                                                class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
+                                                                <i aria-hidden="true" class="ion ion-play"></i> 
+                                                                <span class="text">Watch Trailer</span>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-52.jpg')">
+                            @endforeach
+                            <!-- <div class="item" style="background: url('{{ asset('cover/' . $video->cover) }}')">
                                 <div class="gen-movie-contain h-100">
                                     <div class="container h-100">
                                         <div class="row align-items-center h-100">
@@ -78,7 +76,7 @@
                                                                 R</span>
                                                         </li>
                                                         <li>1hr 46mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
+                                                        <li> <img src="{{ asset('app/images/asset-2.png') }}" alt="streamlab-image">
                                                             <span>
                                                                 0 </span>
                                                         </li>
@@ -114,7 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="item" style="background: url('images/background/asset-24.jpeg')">
+                            <div class="item" style="background: url('{{ asset('cover/' . $video->cover) }}')">
                                 <div class="gen-movie-contain h-100">
                                     <div class="container h-100">
                                         <div class="row align-items-center h-100">
@@ -130,7 +128,7 @@
                                                                 GP </span>
                                                         </li>
                                                         <li>1hr 37 mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
+                                                        <li> <img src="{{ asset('app/images/asset-2.png') }}" alt="streamlab-image">
                                                             <span>
                                                                 0 </span>
                                                         </li>
@@ -163,7 +161,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

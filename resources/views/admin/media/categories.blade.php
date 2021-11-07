@@ -156,7 +156,7 @@
                                         <div class="modal-content">
                                             <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
                                             <div class="modal-body modal-body-lg">
-                                            <form class="edit_category" action="{{ route('admin.media.edit.category') }}/${data.id}" method="post">
+                                            <form action="{{ route('admin.media.edit.category') }}/${data.id}" method="post">
                                                 @csrf
                                                 <div class="form-group">
                                                     <div class="form-label-group">
@@ -205,6 +205,8 @@
                 let dtr = dt.row( $(this).parents('tr') ); // table row
                 let data = dtr.data(); // row data
 
+                const edit_category_form = $(this).offsetParent().offsetParent().next().find('form');
+
                 const options = {
                     type: 'PUT',
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -214,6 +216,7 @@
                     success: function(response) {
                         if (response.hasOwnProperty('success')) {
                             dt.ajax.reload();
+                            $(`#edit_category_${data.id}`).modal('hide');
                             NioApp.Toast(
                                 `<h5>Update Successfully</h5>
                                 <p>Category has been successfully updated.</p>`, 
@@ -244,7 +247,7 @@
                     }
                 };
                 
-                $('.edit_category').validate({
+                edit_category_form.validate({
                     rules: {
                         category: {
                             required: true,
@@ -265,7 +268,7 @@
                         }
                     },
                     submitHandler: function(form) {
-                        // $(form).find('button').prop('disabled', true);
+                        $(form).find('button').prop('disabled', true);
                         $(form).ajaxSubmit(options);
                     }
                 });

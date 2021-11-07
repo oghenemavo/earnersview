@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\User\UserController;
-use Illuminate\Http\Request;
+use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data['page_title'] = 'Home - Earner\'s View';
+    $data['videos'] = Video::all();
+    return view('welcome', $data);
 });
 Route::get('how-it-works', function () {
     return view('how-it-works');
@@ -87,6 +89,8 @@ Route::prefix('admin')->group(function() {
                 Route::get('categories', [MediaController::class, 'categories'])->name('categories');
                 Route::post('create/category', [MediaController::class, 'createCategory'])->name('create.category');
                 Route::put('edit/category/{category?}', [MediaController::class, 'editCategory'])->name('edit.category');
+
+                // videos
                 Route::get('videos', [MediaController::class, 'videos'])->name('videos');
                 Route::post('create/video', [MediaController::class, 'createVideo'])->name('create.video');
                 Route::get('edit/video/{video?}', [MediaController::class, 'editVideo'])->name('edit.video');

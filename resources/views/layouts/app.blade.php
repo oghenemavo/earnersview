@@ -1,3 +1,8 @@
+@php
+    use App\Models\Category;
+
+    $categories = Category::all();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -36,13 +41,24 @@
                         <div class="col-lg-12">
                             <nav class="navbar navbar-expand-lg navbar-light">
                                 <a class="navbar-brand" href="#">
-                                    <img class="img-fluid logo" src="images/logo-1.png" alt="streamlab-image">
+                                    <img class="img-fluid logo" src="{{ asset('app/images/logo-1.png') }}" alt="streamlab-image">
                                 </a>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <div id="gen-menu-contain" class="gen-menu-contain">
                                         <ul id="gen-main-menu" class="navbar-nav ml-auto">
                                             <li class="menu-item active">
                                                 <a href="{{ url('/') }}" aria-current="page">Home</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#">Categories</a>
+                                                <i class="fa fa-chevron-down gen-submenu-icon"></i>
+                                                <ul class="sub-menu">
+                                                    @foreach($categories as $category)
+                                                        <li class="menu-item">
+                                                            <a href="single-movie.html">{{ $category->category }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
                                             </li>
                                             <li class="menu-item">
                                                 <a href="{{ url('how-it-works') }}">How it works</a>
@@ -170,10 +186,10 @@
                                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                                             </p>
                                             <a href="#">
-                                                <img src="images/asset-35.png" class="gen-playstore-logo" alt="playstore">
+                                                <img src="{{ asset('app/images/asset-35.png') }}" class="gen-playstore-logo" alt="playstore">
                                             </a>
                                             <a href="#">
-                                                <img src="images/asset-36.png" class="gen-appstore-logo" alt="appstore">
+                                                <img src="{{ asset('app/images/asset-36.png') }}" class="gen-appstore-logo" alt="appstore">
                                             </a>
                                         </div>
                                     </div>
