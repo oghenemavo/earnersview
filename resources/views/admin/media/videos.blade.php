@@ -429,7 +429,7 @@
                             url: "{{ route('admin.media.block.video') }}",
                             data: {
                                 "_token": `{{ csrf_token() }}`, 
-                                user_id: data.id,
+                                video_id: data.id,
                             },
                             success: function(response) {
                                 if (response.hasOwnProperty('success')) {
@@ -511,7 +511,7 @@
                 messages: {
                     category_id: "Select a Video Category.",
                     body: "Enter Describe your Video here in details",
-                    video: {
+                    cover: {
                         accept: 'Only Images file formats are accepted',
                     }
                 },

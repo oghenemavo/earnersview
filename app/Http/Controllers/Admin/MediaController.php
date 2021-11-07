@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Video;
-use App\Models\Videos;
-use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File as FacadesFile;
 use Illuminate\Support\Str;
@@ -140,7 +138,7 @@ class MediaController extends Controller
             if (FacadesFile::exists($initial_path)) {
                 FacadesFile::delete($initial_path);
             }
-            return redirect()->route('admin.media.videos')->with('primary', 'Video Created Successfully!');
+            return redirect()->route('admin.media.videos')->with('primary', 'Video Edited Successfully!');
         }
         return back()->with('danger', 'Unable to Edit Video!');
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
@@ -84,14 +85,22 @@ Route::prefix('admin')->group(function() {
             // Media
             Route::prefix('media')->name('media.')->group(function() {
                 Route::get('categories', [MediaController::class, 'categories'])->name('categories');
-                Route::get('videos', [MediaController::class, 'videos'])->name('videos');
                 Route::post('create/category', [MediaController::class, 'createCategory'])->name('create.category');
+                Route::put('edit/category/{category?}', [MediaController::class, 'editCategory'])->name('edit.category');
+                Route::get('videos', [MediaController::class, 'videos'])->name('videos');
+                Route::post('create/video', [MediaController::class, 'createVideo'])->name('create.video');
                 Route::get('edit/video/{video?}', [MediaController::class, 'editVideo'])->name('edit.video');
                 Route::put('update/video/{video}', [MediaController::class, 'updateVideo'])->name('update.video');
-                Route::put('edit/category/{category?}', [MediaController::class, 'editCategory'])->name('edit.category');
-                Route::post('create/video', [MediaController::class, 'createVideo'])->name('create.video');
                 Route::put('block/video', [MediaController::class, 'blockVideo'])->name('block.video');
                 Route::put('unblock/video', [MediaController::class, 'unblockVideo'])->name('unblock.video');
+                
+                //promotion
+                Route::get('promotions', [PromotionController::class, 'index'])->name('promotions');
+                Route::post('create/promotion', [PromotionController::class, 'createPromotion'])->name('create.promotion');
+                Route::get('edit/promotion/{promotion?}', [PromotionController::class, 'editPromotion'])->name('edit.promotion');
+                Route::put('update/promotion/{promotion}', [PromotionController::class, 'updatePromotion'])->name('update.promotion');
+                Route::put('block/promotion', [PromotionController::class, 'blockPromotion'])->name('block.promotion');
+                Route::put('unblock/promotion', [PromotionController::class, 'unblockPromotion'])->name('unblock.promotion');
             });
 
         });
@@ -108,5 +117,6 @@ Route::prefix('ajax')->name('ajax.')->group(function() {
         Route::get('all/users', [AjaxController::class, 'allUsers'])->name('get.all.users');
         Route::get('all/categories', [AjaxController::class, 'allCategories'])->name('get.all.categories');
         Route::get('all/videos', [AjaxController::class, 'allVideos'])->name('get.all.videos');
+        Route::get('all/promotions', [AjaxController::class, 'allPromotions'])->name('get.all.promotions');
     });
 });

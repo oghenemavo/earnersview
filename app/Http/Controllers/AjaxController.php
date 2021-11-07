@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Category;
+use App\Models\Promotion;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -85,6 +86,21 @@ class AjaxController extends Controller
             return $data;
         });
         return response()->json(['videos' => $mapped_videos]);
+    }
+
+    public function allPromotions()
+    {
+        $promotion_collection = Promotion::all();
+        $mapped_promotions = $promotion_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['title'] = $item->title;
+            $data['material'] = asset("promotions/$item->material");
+            $data['status'] = $item->status;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['promotions' => $mapped_promotions]);
     }
     
 }

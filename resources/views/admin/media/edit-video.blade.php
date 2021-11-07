@@ -19,7 +19,7 @@
     <div class="card card-bordered">
         <div class="card-inner">
             <div class="card-head">
-                <h5 class="card-title">Event Displayed Setup</h5>
+                <h5 class="card-title">Video Details Setup</h5>
             </div>
 
             <form id="edit_video" action="{{ route('admin.media.update.video', $video->id) }}" method="post" enctype="multipart/form-data">
@@ -235,7 +235,7 @@
                 messages: {
                     category_id: "Select a Video Category.",
                     body: "Enter Describe your Video here in details",
-                    video: {
+                    cover: {
                         accept: 'Only Images file formats are accepted',
                     }
                 },
