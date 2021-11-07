@@ -223,10 +223,8 @@
                                 'success',
                                 {position: 'top-right'}
                             );
-                        } else {
-                            NioApp.Toast('No changes made.', 'warning', {position: 'top-right'});
                         }
-                        $(this).find('button').text('Edit Category').prop('disabled', false);
+                        edit_category_form.find('button').text('Edit Category').prop('disabled', false);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         console.log(XMLHttpRequest.status)
