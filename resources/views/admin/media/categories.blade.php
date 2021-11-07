@@ -212,9 +212,8 @@
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response) {
-                        console.log(response)
-                        console.log(response.hasOwnProperty('success'))
                         if (response.hasOwnProperty('success')) {
+                            dt.ajax.reload();
                             NioApp.Toast(
                                 `<h5>Update Successfully</h5>
                                 <p>Category has been successfully updated.</p>`, 

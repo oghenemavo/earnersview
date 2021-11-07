@@ -225,7 +225,7 @@
                             success: function(response) {
                                 if (response.hasOwnProperty('success')) {
                                     dt.ajax.reload();
-                                    Swal.fire('Suspended!', 'User has been activated.', 'success');
+                                    Swal.fire('Activated!', 'User has been activated.', 'success');
                                 }
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -59,16 +60,31 @@ class AjaxController extends Controller
 
     public function allCategories()
     {
-        $categories = Category::all();
-        // $mapped_users = $categories->map(function($item, $key) {
-        //     $data['id'] = $item->id;
-        //     $data['name'] = $item->category;
-        //     $data['slug'] = $item->slug;
-        //     $data['created_at'] = $item->created_at;
+        $category_collection = Category::all();
+        return response()->json(['categories' => $category_collection]);
+    }
 
-        //     return $data;
-        // });
-        return response()->json(['categories' => $categories]);
+    public function allVideos()
+    {
+        $video_collection = Video::all();
+        $mapped_videos = $video_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['title'] = $item->title;
+            $data['slug'] = $item->slug;
+            $data['category'] = $item->category->category;
+            $data['description'] = $item->description;
+            $data['url'] = $item->url;
+            $data['cover'] = asset("cover/$item->cover");
+            $data['length'] = $item->length;
+            $data['charges'] = $item->charges;
+            $data['earnable'] = $item->earnable;
+            $data['earned_after'] = $item->earned_after;
+            $data['status'] = $item->status;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['videos' => $mapped_videos]);
     }
     
 }

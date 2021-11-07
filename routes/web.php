@@ -86,7 +86,12 @@ Route::prefix('admin')->group(function() {
                 Route::get('categories', [MediaController::class, 'categories'])->name('categories');
                 Route::get('videos', [MediaController::class, 'videos'])->name('videos');
                 Route::post('create/category', [MediaController::class, 'createCategory'])->name('create.category');
+                Route::get('edit/video/{video?}', [MediaController::class, 'editVideo'])->name('edit.video');
+                Route::put('update/video/{video}', [MediaController::class, 'updateVideo'])->name('update.video');
                 Route::put('edit/category/{category?}', [MediaController::class, 'editCategory'])->name('edit.category');
+                Route::post('create/video', [MediaController::class, 'createVideo'])->name('create.video');
+                Route::put('block/video', [MediaController::class, 'blockVideo'])->name('block.video');
+                Route::put('unblock/video', [MediaController::class, 'unblockVideo'])->name('unblock.video');
             });
 
         });
@@ -102,5 +107,6 @@ Route::prefix('ajax')->name('ajax.')->group(function() {
     Route::prefix('get')->group(function() {
         Route::get('all/users', [AjaxController::class, 'allUsers'])->name('get.all.users');
         Route::get('all/categories', [AjaxController::class, 'allCategories'])->name('get.all.categories');
+        Route::get('all/videos', [AjaxController::class, 'allVideos'])->name('get.all.videos');
     });
 });
