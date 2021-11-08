@@ -66,12 +66,12 @@ class MediaController extends Controller
             'category_id' => 'required',
             'title' => 'required|min:2',
             'description' => 'required|min:10',
-            'url' => 'required|url',
+            'video_id' => 'required|size:11',
             'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'length' => 'required',
-            'charges' => 'required',
-            'earnable' => 'required',
-            'earned_after' => 'required',
+            'length' => 'required|numeric',
+            'charges' => 'required|numeric',
+            'earnable' => 'required|numeric',
+            'earned_after' => 'required|numeric',
         ];
         $request->validate($rules);
 
@@ -85,6 +85,7 @@ class MediaController extends Controller
             $data['slug'] = Str::of($data['title'])->slug('-') . '-' . uniqid();
             $data['description'] = $this->clean($request->description);
             $data['cover'] = $name;
+            $data['url'] = 'https://youtube.com/watch?v=' . $request->video_id;
     
             $result = Video::create($data);
             if ($result) {
@@ -109,7 +110,7 @@ class MediaController extends Controller
             'category_id' => 'required',
             'title' => 'required|min:2',
             'description' => 'required|min:10',
-            'url' => 'required|url',
+            'video_id' => 'required|size:11',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'length' => 'required',
             'charges' => 'required',
@@ -130,6 +131,8 @@ class MediaController extends Controller
         if ($video->title != $data['title']) {
             $data['slug'] = Str::of($data['title'])->slug('-') . '-' . uniqid();
         }
+
+        $data['url'] = 'https://youtube.com/watch?v=' . $request->video_id;
         
         $data['description'] = $this->clean($request->description);
         $result = $video->update($data);

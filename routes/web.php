@@ -98,7 +98,7 @@ Route::prefix('admin')->group(function() {
                 Route::put('block/video', [MediaController::class, 'blockVideo'])->name('block.video');
                 Route::put('unblock/video', [MediaController::class, 'unblockVideo'])->name('unblock.video');
                 
-                //promotion
+                // promotion
                 Route::get('promotions', [PromotionController::class, 'index'])->name('promotions');
                 Route::post('create/promotion', [PromotionController::class, 'createPromotion'])->name('create.promotion');
                 Route::get('edit/promotion/{promotion?}', [PromotionController::class, 'editPromotion'])->name('edit.promotion');

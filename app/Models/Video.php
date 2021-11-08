@@ -32,4 +32,16 @@ class Video extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getVideoIdAttribute()
+    {
+        parse_str(parse_url($this->url)['query'], $params);
+        $video_id = $params['v'];
+        return $video_id;
+    }
+
+    public function getCoverPathAttribute()
+    {
+        return asset("cover/$this->cover");
+    }
 }

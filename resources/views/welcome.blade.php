@@ -11,7 +11,7 @@
                             data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1"
                             data-autoplay="true" data-loop="true" data-margin="30">
                             @foreach($videos as $video)
-                                <div class="item" style="background: url('{{ asset('cover/' . $video->cover) }}')">
+                                <div class="item" style="background: url('{{ $video->cover_path }}')">
                                     <div class="gen-movie-contain h-100">
                                         <div class="container h-100">
                                             <div class="row align-items-center h-100">
@@ -27,7 +27,7 @@
                                                                     R </span>
                                                             </li>
                                                             <li>1hr 44 mins</li>
-                                                            <li> <img src="{{ asset('cover/' . $video->cover) }}" alt="streamlab-image">
+                                                            <li> <img src="{{ $video->cover_path }}" alt="streamlab-image">
                                                                 <span>
                                                                     0 </span>
                                                             </li>
@@ -35,10 +35,10 @@
                                                                 2018
                                                             </li>
                                                             <li>
-                                                                <a href="action.html"><span>Action</span></a>
+                                                                <a href="action.html"><span>{{ $video->category->category }}</span></a>
                                                             </li>
                                                         </ul>
-                                                        <p>{{ strip_tags(htmlspecialchars_decode($video->description)) }}</p>
+                                                        <p>{{ strip_tags(htmlspecialchars_decode(Str::limit($video->description, 253))) }}</p>
                                                     </div>
                                                     <div class="gen-movie-action">
                                                         <div class="gen-btn-container button-1">

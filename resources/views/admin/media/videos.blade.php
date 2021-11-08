@@ -89,34 +89,46 @@
                         </div>
                         <div data-error="category_id" class="error"></div>
                     </div>
+
                     <div class="form-group">
                         <div class="form-label-group">
-                            <label class="form-label" for="url">Video Url</label>
+                            <label class="form-label" for="video_id">Youtube Video ID</label>
                         </div>
                         <div class="form-control-wrap">
-                            <input type="url" class="form-control form-control-lg  @error('url') is-invalid @enderror"
-                            id="url" name="url" value="{{ old('url') }}">
-                            
-                            @error('url')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">https://youtube.com/watch?v=</span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg  @error('video_id') is-invalid @enderror"
+                                id="video_id" name="video_id" value="{{ old('video_id') }}" placeholder="e.g. l7fXRnM121Q">
+                                
+                                @error('video_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="form-label-group">
                             <label class="form-label" for="length">Video Length</label>
                         </div>
                         <div class="form-control-wrap">
-                            <input type="number" class="form-control form-control-lg @error('length') is-invalid @enderror"
-                            id="length" name="length" value="{{ old('length') }}">
-                            
-                            @error('length')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group">
+                                <input type="number" class="form-control form-control-lg @error('length') is-invalid @enderror"
+                                id="length" name="length" value="{{ old('length') }}" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">seconds</span>
+                                </div>
+                                @error('length')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-note" data-note="length"></div>
                         </div>
                     </div>
                     
@@ -141,14 +153,19 @@
                             <label class="form-label" for="charges">Vendor Charges</label>
                         </div>
                         <div class="form-control-wrap">
-                            <input type="number" class="form-control form-control-lg  @error('charges') is-invalid @enderror"
-                            id="charges" name="charges" value="{{ old('charges') }}" min="1" step="0.01">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">&#8358;</span>
+                                </div>
+                                <input type="number" class="form-control form-control-lg  @error('charges') is-invalid @enderror"
+                                id="charges" name="charges" value="{{ old('charges') }}" min="1" step="0.01">
                             
-                            @error('charges')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @error('charges')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
@@ -157,29 +174,40 @@
                             <label class="form-label" for="earnable">Earnable</label>
                         </div>
                         <div class="form-control-wrap">
-                            <input type="number" class="form-control form-control-lg  @error('earnable') is-invalid @enderror"
-                            id="earnable" name="earnable" value="{{ old('earnable') }}" min="1" step="0.01">
-                            
-                            @error('earnable')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">&#8358;</span>
+                                </div>
+                                <input type="number" class="form-control form-control-lg  @error('earnable') is-invalid @enderror"
+                                id="earnable" name="earnable" value="{{ old('earnable') }}" min="1" step="0.01">
+                                
+                                @error('earnable')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="earned_after">Earn After</label>
-                        <div class="form-control-wrap number-spinner-wrap">
-                            <button type="button" class="btn btn-icon btn-primary number-spinner-btn number-minus" data-number="minus"><em class="icon ni ni-minus"></em></button>
-                            <input type="number" id="earned_after" name="earned_after" class="form-control number-spinner @error('earnable') is-invalid @enderror" value="1">
-                            <button type="button" class="btn btn-icon btn-primary number-spinner-btn number-plus" data-number="plus"><em class="icon ni ni-plus"></em></button>
-                        
-                            @error('earned_after')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <div class="form-label-group">
+                            <label class="form-label" for="earned_after">Earn After Watching for:</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <div class="input-group">
+                                <input type="number" class="form-control form-control-lg @error('earned_after') is-invalid @enderror"
+                                id="earned_after" name="earned_after" value="0" readonly>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">seconds</span>
+                                </div>
+                                @error('earned_after')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-note" data-note="earned_after"></div>
                         </div>
                     </div>
 
@@ -229,6 +257,53 @@
 
     <script>
         $(function() {
+            $('#earned_after').on('input change keypress', function() {
+                if ($(this).attr('max') > 0) {
+                    $('div[data-note="earned_after"]').text(hhmmss($(this).val()))
+                }
+            });
+            
+            $('#video_id').on('input', function() {
+                const video_id = $(this).val();
+                if (video_id.length == 11) {
+                    fetchVideoInfo(`https://www.googleapis.com/youtube/v3/videos?id=${video_id}&part=contentDetails&key={{ env('YOUTUBE_KEY') }}`)
+                    .then(data => {
+                        $('#length').val('');
+                        $('#earned_after').val('').attr('readonly', true).removeAttr('max');
+                        $('div[data-note="length"]').text('');
+
+                        if (data.pageInfo.totalResults == '1') { // returned a result
+                            const iso8601 = data.items[0].contentDetails.duration;
+                            const seconds = moment.duration(iso8601).asSeconds();
+                            $('#length').val(seconds);
+                            $('#earned_after').attr('max', seconds-1).attr('readonly', false);
+                            $('div[data-note="length"]').text(hhmmss(seconds));
+                            $('#create_video').find('button[type="submit"]').attr('disabled', false);
+                        } else {
+                            toastr.clear();
+                            NioApp.Toast('The Youtube ID is wrong.', 'warning', {
+                                position: 'top-right',
+                                ui: 'is-dark',
+                            });
+                            $('#create_video').find('button[type="submit"]').attr('disabled', true);
+                        }
+                    })
+                    .catch(error => {
+                        console.log()
+                        error.message; // 'An error has occurred: 404'
+                    });
+                }
+            });
+
+            async function fetchVideoInfo(url) {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    const message = `An error has occured: ${response.status}`;
+                    throw new Error(message);
+                }
+                return await response.json();
+            }
+
             NioApp.DataTable($('#video_table'), {
                 ajax: {
                     url: `{{ route('ajax.get.all.videos') }}`,
@@ -322,16 +397,16 @@
                                                     <dd class="col-sm-9">${data.description}</dd>
     
                                                     <dt class="col-sm-3">Video Length</dt>
-                                                    <dd class="col-sm-9">${data.length}</dd>
+                                                    <dd class="col-sm-9">${hhmmss(data.length)}</dd>
     
                                                     <dt class="col-sm-3">Vendor Charges</dt>
-                                                    <dd class="col-sm-9">${data.charges}</dd>
+                                                    <dd class="col-sm-9">&#8358;${data.charges}</dd>
     
                                                     <dt class="col-sm-3">Earnable</dt>
-                                                    <dd class="col-sm-9">${data.earnable}</dd>
+                                                    <dd class="col-sm-9">&#8358;${data.earnable}</dd>
     
                                                     <dt class="col-sm-3">Earned After</dt>
-                                                    <dd class="col-sm-9">&#8358;${data.earned_after}</dd>
+                                                    <dd class="col-sm-9">${hhmmss(data.earned_after)}</dd>
     
                                                     <dt class="col-sm-3">Cover</dt>
                                                     <dd class="col-sm-9">
@@ -485,9 +560,10 @@
                     category_id: {
                         required: true,
                     },
-                    url: {
+                    video_id: {
                         required: true,
-                        minlength: 4,
+                        minlength: 11,
+                        maxlength: 11,
                     },
                     length: {
                         required: true,
@@ -516,6 +592,18 @@
                     }
                 },
             });
+
+            function pad(num) {
+                return ("0"+num).slice(-2);
+            }
+            function hhmmss(secs) {
+                var minutes = Math.floor(secs / 60);
+                secs = secs%60;
+                var hours = Math.floor(minutes/60)
+                minutes = minutes%60;
+                return `${pad(hours)}:${pad(minutes)}:${pad(secs)}`;
+            // return pad(hours)+":"+pad(minutes)+":"+pad(secs); for old browsers
+            }
         });
     </script>
 @endpush

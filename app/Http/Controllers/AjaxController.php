@@ -73,7 +73,7 @@ class AjaxController extends Controller
             $data['title'] = $item->title;
             $data['slug'] = $item->slug;
             $data['category'] = $item->category->category;
-            $data['description'] = $item->description;
+            $data['description'] = htmlspecialchars_decode($item->description);
             $data['url'] = $item->url;
             $data['cover'] = asset("cover/$item->cover");
             $data['length'] = $item->length;
