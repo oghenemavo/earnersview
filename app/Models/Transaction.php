@@ -22,4 +22,10 @@ class Transaction extends Model
         'is_confirmed',
         'confirmed_at',
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

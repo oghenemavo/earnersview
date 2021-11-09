@@ -36,6 +36,15 @@
                     <div class="nk-content nk-content-fluid">
                         <div class="container-xl wide-lg">
                             <div class="nk-content-body">
+
+                                <!-- notifications alert -->
+                                @foreach(['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'gray', 'light'] as $alert)
+                                    @if(session()->has($alert))
+                                        <x-alert type="{{ $alert }}" :message="session()->get($alert)"/>
+                                    @endif
+                                @endforeach
+                                <!-- notifications alert -->
+
                                 <!-- main content -->
                                 @yield('content')
                                 <!-- main content -->

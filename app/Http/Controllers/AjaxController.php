@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Category;
+use App\Models\Payout;
 use App\Models\Promotion;
+use App\Models\Referral;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -101,6 +104,61 @@ class AjaxController extends Controller
             return $data;
         });
         return response()->json(['promotions' => $mapped_promotions]);
+    }
+    
+    public function allTransactions()
+    {
+        $transaction_collection = Transaction::all();
+        $mapped_transactions = $transaction_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['name'] = $item->user->name;
+            $data['email'] = $item->user->email;
+            $data['amount'] = $item->amount;
+            $data['reference'] = $item->tx_ref;
+            $data['status'] = $item->is_confirmed;
+            $data['confirmed_at'] = $item->confirmed_at;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['transactions' => $mapped_transactions]);
+    }
+
+    public function allReferrals()
+    {
+        $referral_collection = Referral::all();
+        $mapped_referrals = $referral_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['referrer'] = $item->referrer->name;
+            $data['referred'] = $item->referrer->name;
+            $data['bonus'] = $item->bonus;
+            $data['status'] = $item->status;
+            $data['bonus_at'] = $item->bonus_at;
+            $data['credited_at'] = $item->credited_at;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['referrals' => $mapped_referrals]);
+    }
+
+    public function allPayouts()
+    {
+        $payout_collection = Payout::all();
+        $mapped_payouts = $payout_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['name'] = $item->user->name;
+            $data['receipt'] = $item->receipt_no;
+            $data['amount'] = $item->amount;
+            $data['reference'] = $item->reference;
+            $data['status'] = $item->status;
+            $data['is_notified'] = $item->is_notified;
+            $data['attempts'] = $item->attempts;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['payouts' => $mapped_payouts]);
     }
     
 }

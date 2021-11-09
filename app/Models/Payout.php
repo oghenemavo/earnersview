@@ -19,4 +19,9 @@ class Payout extends Model
         'is_notified',
         'attempts',
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

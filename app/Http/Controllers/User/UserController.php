@@ -138,6 +138,12 @@ class UserController extends Controller
                 ['user_id' => $user_id],
                 ['reference' => $tx_ref, 'amount' => $total_amount,]
             );
+
+            if ($membership) {
+                return back()->with('success', 'payment successful, you have subscribed');
+            }
+
+            
             // send email
             // $notification = [];
             // $dbOrders = Order::where('transaction_id', $orders[0]['transaction_id'])->get();

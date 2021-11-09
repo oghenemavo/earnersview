@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
@@ -116,6 +117,14 @@ Route::prefix('admin')->group(function() {
                 Route::put('unblock/promotion', [PromotionController::class, 'unblockPromotion'])->name('unblock.promotion');
             });
 
+            // Media
+            Route::prefix('report')->name('report.')->group(function() {
+                Route::get('transactions', [ReportController::class, 'transactions'])->name('transactions');
+                Route::post('/requery/transaction/{tx_ref}', [ReportController::class, 'requery'])->name('requery');
+                Route::get('referrals', [ReportController::class, 'referrals'])->name('referrals');
+                Route::get('payouts', [ReportController::class, 'payouts'])->name('payouts');
+            });
+
         });
     });
 });
@@ -131,5 +140,8 @@ Route::prefix('ajax')->name('ajax.')->group(function() {
         Route::get('all/categories', [AjaxController::class, 'allCategories'])->name('get.all.categories');
         Route::get('all/videos', [AjaxController::class, 'allVideos'])->name('get.all.videos');
         Route::get('all/promotions', [AjaxController::class, 'allPromotions'])->name('get.all.promotions');
+        Route::get('all/transactions', [AjaxController::class, 'allTransactions'])->name('get.all.transactions');
+        Route::get('all/referrals', [AjaxController::class, 'allReferrals'])->name('get.all.referrals');
+        Route::get('all/payouts', [AjaxController::class, 'allPayouts'])->name('get.all.payouts');
     });
 });
