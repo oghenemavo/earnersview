@@ -10,7 +10,7 @@
                         <div class="owl-carousel owl-loaded owl-drag" data-dots="false" data-nav="true"
                             data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1"
                             data-autoplay="true" data-loop="true" data-margin="30">
-                            @foreach($videos as $video)
+                            @foreach($slider as $video)
                                 <div class="item" style="background: url('{{ $video->cover_path }}')">
                                     <div class="gen-movie-contain h-100">
                                         <div class="container h-100">
@@ -60,108 +60,6 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <!-- <div class="item" style="background: url('{{ asset('cover/' . $video->cover) }}')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>the darkest nightplace</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                R</span>
-                                                        </li>
-                                                        <li>1hr 46mins</li>
-                                                        <li> <img src="{{ asset('app/images/asset-2.png') }}" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2017
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <span class="text">Play Now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('{{ asset('cover/' . $video->cover) }}')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>The Last Witness</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                GP </span>
-                                                        </li>
-                                                        <li>1hr 37 mins</li>
-                                                        <li> <img src="{{ asset('app/images/asset-2.png') }}" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <span class="text">Play Now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -193,33 +91,27 @@
                         <div class="owl-carousel owl-loaded owl-drag" data-dots="false" data-nav="true"
                             data-desk_num="4" data-lap_num="3" data-tab_num="2" data-mob_num="1" data-mob_sm="1"
                             data-autoplay="false" data-loop="false" data-margin="30">
+
+                            @foreach($feed as $video)
                             <div class="item">
-                                <div
-                                    class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
+                                <div class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
                                     <div class="gen-carousel-movies-style-3 movie-grid style-3">
                                         <div class="gen-movie-contain">
                                             <div class="gen-movie-img">
-                                                <img src="images/background/asset-53.jpg"
-                                                    alt="owl-carousel-video-image">
+                                                <img src="{{ $video->cover_path }}" alt="owl-carousel-video-image">
                                                 <div class="gen-movie-add">
                                                     <div class="wpulike wpulike-heart">
                                                         <div class="wp_ulike_general_class wp_ulike_is_not_liked">
-                                                            <button type="button"
-                                                                class="wp_ulike_btn wp_ulike_put_image"></button>
+                                                            <button type="button" class="wp_ulike_btn wp_ulike_put_image"></button>
                                                         </div>
                                                     </div>
                                                     <ul class="menu bottomRight">
                                                         <li class="share top">
                                                             <i class="fa fa-share-alt"></i>
                                                             <ul class="submenu">
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-facebook-f"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-instagram"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-twitter"></i></a></li>
+                                                                <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a> </li>
+                                                                <li><a href="#" class="facebook"><i class="fab fa-instagram"></i></a></li>
+                                                                <li><a href="#" class="facebook"><i class="fab fa-twitter"></i></a></li>
                                                             </ul>
                                                         </li>
                                                     </ul>
@@ -229,10 +121,9 @@
                                                         <div class="dropdown-menu mCustomScrollbar">
                                                             <div class="mCustomScrollBox">
                                                                 <div class="mCSB_container">
-                                                                    <a class="login-link" href="register.html">Sign in
-                                                                        to add this
-                                                                        movie to a
-                                                                        playlist.</a>
+                                                                    <a class="login-link" href="register.html">
+                                                                        Sign in to add this movie to a playlist.
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -253,7 +144,7 @@
                                                     <ul>
                                                         <li>1hr 24 mins</li>
                                                         <li>
-                                                            <a href="action.html"><span>Action</span></a>
+                                                            <a href="action.html"><span>{{ $video->category->category }}</span></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -263,293 +154,7 @@
                                 </div>
                                 <!-- #post-## -->
                             </div>
-
-                            <div class="item">
-                                <div
-                                    class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
-                                    <div class="gen-carousel-movies-style-3 movie-grid style-3">
-                                        <div class="gen-movie-contain">
-                                            <div class="gen-movie-img">
-                                                <img src="images/background/asset-32.jpeg"
-                                                    alt="owl-carousel-video-image">
-                                                <div class="gen-movie-add">
-                                                    <div class="wpulike wpulike-heart">
-                                                        <div class="wp_ulike_general_class wp_ulike_is_not_liked">
-                                                            <button type="button"
-                                                                class="wp_ulike_btn wp_ulike_put_image"></button>
-                                                        </div>
-                                                    </div>
-                                                    <ul class="menu bottomRight">
-                                                        <li class="share top">
-                                                            <i class="fa fa-share-alt"></i>
-                                                            <ul class="submenu">
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-facebook-f"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-instagram"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-twitter"></i></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="movie-actions--link_add-to-playlist dropdown">
-                                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                                                class="fa fa-plus"></i></a>
-                                                        <div class="dropdown-menu mCustomScrollbar">
-                                                            <div class="mCustomScrollBox">
-                                                                <div class="mCSB_container">
-                                                                    <a class="login-link" href="register.html">Sign in
-                                                                        to add this
-                                                                        movie to a
-                                                                        playlist.</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <a href="single-movie.html" class="gen-button">
-                                                        <i class="fa fa-play"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="gen-info-contain">
-                                                <div class="gen-movie-info">
-                                                    <h3><a href="single-movie.html">Love, Simon</a>
-                                                    </h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li>1hr 50 mins</li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- #post-## -->
-                            </div>
-
-
-                            <div class="item">
-                                <div
-                                    class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
-                                    <div class="gen-carousel-movies-style-3 movie-grid style-3">
-                                        <div class="gen-movie-contain">
-                                            <div class="gen-movie-img">
-                                                <img src="images/background/asset-14.jpeg"
-                                                    alt="owl-carousel-video-image">
-                                                <div class="gen-movie-add">
-                                                    <div class="wpulike wpulike-heart">
-                                                        <div class="wp_ulike_general_class wp_ulike_is_not_liked">
-                                                            <button type="button"
-                                                                class="wp_ulike_btn wp_ulike_put_image"></button>
-                                                        </div>
-                                                    </div>
-                                                    <ul class="menu bottomRight">
-                                                        <li class="share top">
-                                                            <i class="fa fa-share-alt"></i>
-                                                            <ul class="submenu">
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-facebook-f"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-instagram"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-twitter"></i></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="movie-actions--link_add-to-playlist dropdown">
-                                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                                                class="fa fa-plus"></i></a>
-                                                        <div class="dropdown-menu mCustomScrollbar">
-                                                            <div class="mCustomScrollBox">
-                                                                <div class="mCSB_container">
-                                                                    <a class="login-link" href="register.html">Sign in
-                                                                        to add this
-                                                                        movie to a
-                                                                        playlist.</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <a href="single-movie.html" class="gen-button">
-                                                        <i class="fa fa-play"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="gen-info-contain">
-                                                <div class="gen-movie-info">
-                                                    <h3><a href="single-movie.html">Have a Nice Day</a>
-                                                    </h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li>1hr 17 mins</li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- #post-## -->
-                            </div>
-
-
-                            <div class="item">
-                                <div
-                                    class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
-                                    <div class="gen-carousel-movies-style-3 movie-grid style-3">
-                                        <div class="gen-movie-contain">
-                                            <div class="gen-movie-img">
-                                                <img src="images/background/asset-61.jpg"
-                                                    alt="owl-carousel-video-image">
-                                                <div class="gen-movie-add">
-                                                    <div class="wpulike wpulike-heart">
-                                                        <div class="wp_ulike_general_class wp_ulike_is_not_liked">
-                                                            <button type="button"
-                                                                class="wp_ulike_btn wp_ulike_put_image"></button>
-                                                        </div>
-                                                    </div>
-                                                    <ul class="menu bottomRight">
-                                                        <li class="share top">
-                                                            <i class="fa fa-share-alt"></i>
-                                                            <ul class="submenu">
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-facebook-f"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-instagram"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-twitter"></i></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="movie-actions--link_add-to-playlist dropdown">
-                                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                                                class="fa fa-plus"></i></a>
-                                                        <div class="dropdown-menu mCustomScrollbar">
-                                                            <div class="mCustomScrollBox">
-                                                                <div class="mCSB_container">
-                                                                    <a class="login-link" href="register.html">Sign in
-                                                                        to add this
-                                                                        movie to a
-                                                                        playlist.</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <a href="single-movie.html" class="gen-button">
-                                                        <i class="fa fa-play"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="gen-info-contain">
-                                                <div class="gen-movie-info">
-                                                    <h3><a href="single-movie.html">Don Of Thieves</a>
-                                                    </h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li>2hr 20 mins</li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- #post-## -->
-                            </div>
-
-
-                            <div class="item">
-                                <div
-                                    class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
-                                    <div class="gen-carousel-movies-style-3 movie-grid style-3">
-                                        <div class="gen-movie-contain">
-                                            <div class="gen-movie-img">
-                                                <img src="images/background/asset-25.jpeg"
-                                                    alt="owl-carousel-video-image">
-                                                <div class="gen-movie-add">
-                                                    <div class="wpulike wpulike-heart">
-                                                        <div class="wp_ulike_general_class wp_ulike_is_not_liked">
-                                                            <button type="button"
-                                                                class="wp_ulike_btn wp_ulike_put_image"></button>
-                                                        </div>
-                                                    </div>
-                                                    <ul class="menu bottomRight">
-                                                        <li class="share top">
-                                                            <i class="fa fa-share-alt"></i>
-                                                            <ul class="submenu">
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-facebook-f"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-instagram"></i></a>
-                                                                </li>
-                                                                <li><a href="#" class="facebook"><i
-                                                                            class="fab fa-twitter"></i></a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="movie-actions--link_add-to-playlist dropdown">
-                                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><i
-                                                                class="fa fa-plus"></i></a>
-                                                        <div class="dropdown-menu mCustomScrollbar">
-                                                            <div class="mCustomScrollBox">
-                                                                <div class="mCSB_container">
-                                                                    <a class="login-link" href="register.html">Sign in
-                                                                        to add this
-                                                                        movie to a
-                                                                        playlist.</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <a href="single-movie.html" class="gen-button">
-                                                        <i class="fa fa-play"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="gen-info-contain">
-                                                <div class="gen-movie-info">
-                                                    <h3><a href="single-movie.html">Fight For Life</a>
-                                                    </h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li>2hr 25 mins</li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- #post-## -->
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -1323,522 +928,58 @@
                         <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false"
                             data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1"
                             data-autoplay="true" data-loop="true" data-margin="30">
-                            <div class="item" style="background: url('images/background/asset-5.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span>New Realease</span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>The warrior life</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                R </span>
-                                                        </li>
-                                                        <li>2hr 00mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                8.5 </span>
-                                                        </li>
-                                                        <li>
-                                                            2020
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
+                            @foreach($promotions as $promotion)
+                                <div class="item" style="background: url('{{ $promotion->material_path }}')">
+                                    <div class="gen-movie-contain h-100">
+                                        <div class="container h-100">
+                                            <div class="row align-items-center h-100">
+                                                <div class="col-xl-6">
+                                                    <div class="gen-tag-line"><span>New Realease</span></div>
+                                                    <div class="gen-movie-info">
+                                                        <h3>{{ $promotion->title }}</h3>
                                                     </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
+                                                    <div class="gen-movie-meta-holder">
+                                                        <ul>
+                                                            <li class="gen-sen-rating">
+                                                                <span>
+                                                                    R </span>
+                                                            </li>
+                                                            <li>2hr 00mins</li>
+                                                            <li> <img src="{{ asset('images/asset-2.png') }}" alt="streamlab-image">
+                                                                <span>
+                                                                    8.5 </span>
+                                                            </li>
+                                                            <li>
+                                                                2020
+                                                            </li>
+                                                            <li>
+                                                                <a href="action.html"><span>Action</span></a>
+                                                            </li>
+                                                        </ul>
+                                                        <p>ssssassd is a long established fact that a reader will be
+                                                            distracted by the readable content of a page when Streamlab at
+                                                            its layout Streamlab.</p>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-6.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>machine war</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                U</span>
-                                                        </li>
-                                                        <li>1hr 22mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2017
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
+                                                    <div class="gen-movie-action">
+                                                        <div class="gen-btn-container button-1">
+                                                            <a href="single-movie.html" class="gen-button">
+                                                                <i aria-hidden="true" class="ion ion-play"></i> <span
+                                                                    class="text">Play now</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="gen-btn-container button-2">
+                                                            <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
+                                                                class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
+                                                                <span class="text">Watch Trailer</span>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-7.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>the horse lady</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                R </span>
-                                                        </li>
-                                                        <li>1hr 24mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2016
-                                                        </li>
-                                                        <li>
-                                                            <a href="drama.html"><span>Drama</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-8.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>Ship of full moon</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                PG - 13 </span>
-                                                        </li>
-                                                        <li>1hr 35mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-9.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>Rebuneka the doll</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                R </span>
-                                                        </li>
-                                                        <li>1hr 44mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="drama.html"><span>Drama</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-4.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span>High Rated</span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>thieve the bank</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                TV-MA </span>
-                                                        </li>
-                                                        <li>30mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                9.5 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-10.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>skull of myths</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                TV-G </span>
-                                                        </li>
-                                                        <li>1hr 24mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2016
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-11.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>the giant ship</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                R </span>
-                                                        </li>
-                                                        <li>1hr 02mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2017
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-12.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>common man’s idea</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                PG-13 </span>
-                                                        </li>
-                                                        <li>1hr 51mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item" style="background: url('images/background/asset-13.jpeg')">
-                                <div class="gen-movie-contain h-100">
-                                    <div class="container h-100">
-                                        <div class="row align-items-center h-100">
-                                            <div class="col-xl-6">
-                                                <div class="gen-tag-line"><span></span></div>
-                                                <div class="gen-movie-info">
-                                                    <h3>the jin’s friend</h3>
-                                                </div>
-                                                <div class="gen-movie-meta-holder">
-                                                    <ul>
-                                                        <li class="gen-sen-rating">
-                                                            <span>
-                                                                PG-13 </span>
-                                                        </li>
-                                                        <li>1hr 42mins</li>
-                                                        <li> <img src="images/asset-2.png" alt="streamlab-image">
-                                                            <span>
-                                                                0 </span>
-                                                        </li>
-                                                        <li>
-                                                            2018
-                                                        </li>
-                                                        <li>
-                                                            <a href="action.html"><span>Action</span></a>
-                                                        </li>
-                                                    </ul>
-                                                    <p>Streamlab is a long established fact that a reader will be
-                                                        distracted by the readable content of a page when Streamlab at
-                                                        its layout. The point of using Lorem Streamlab is that it has a
-                                                        more-or-less normal distribution of Streamlab as opposed
-                                                        Streamlab.</p>
-                                                </div>
-                                                <div class="gen-movie-action">
-                                                    <div class="gen-btn-container button-1">
-                                                        <a href="single-movie.html" class="gen-button">
-                                                            <i aria-hidden="true" class="ion ion-play"></i> <span
-                                                                class="text">Play now</span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="gen-btn-container button-2">
-                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
-                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
-                                                            <span class="text">Watch Trailer</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

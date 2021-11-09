@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Library\Facades\FlutterwaveFacade;
+use App\Models\Membership;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -101,4 +105,75 @@ class UserController extends Controller
         }
         return back()->with('success', 'Unable to Update Password!');
     }
+
+    public function setMembership()
+    {
+        $transaction = [
+            'details' => 'Membership',
+            'email' =>  auth()->guard('web')->user()->email,
+            'name' =>  auth()->guard('web')->user()->name,
+            'amount' => env('SUBSCRIPTION_FEE'),
+            'tx_ref' => strtolower(bin2hex(openssl_random_pseudo_bytes(10))),
+            'user_id' => auth()->guard('web')->user()->id,
+        ];
+
+        if (Transaction::create($transaction)) {
+            FlutterwaveFacade::gateway($transaction);
+        }
+    }
+
+    public function paymentProcess(Request $request)
+    {
+        $result = FlutterwaveFacade::process($request);
+        if ($result) {
+            $user_id = $result->data->meta->user_id;
+            $tx_ref = $result->data->tx_ref;
+            $total_amount = $result->data->amount;
+
+            Transaction::where('tx_ref', $tx_ref)->update(['is_confirmed' => '1', 'confirmed_at' => date('Y-m-d H:i:s')]);
+            
+
+            // Retrieve flight by name or instantiate with the name, delayed, and arrival_time attributes...
+            $membership = Membership::firstOrCreate(
+                ['user_id' => $user_id],
+                ['reference' => $tx_ref, 'amount' => $total_amount,]
+            );
+            // send email
+            // $notification = [];
+            // $dbOrders = Order::where('transaction_id', $orders[0]['transaction_id'])->get();
+            // foreach ($dbOrders as $order) {
+            //     $data['order'] = $order;
+                
+            //     $html = view('email.ticket-receipt', $data)->render();
+            //     $notification[] = [
+            //         'email' => $order->email,
+            //         'name' => $order->lastname . ' ' . $order->firstname,
+            //         'subject' => 'Ticket ' . $order->event->title,
+            //         'body' => $html,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now(),
+            //     ];
+            // }
+    
+            // if (count($notification)) {
+            //     Notification::insert($notification);
+            // }
+            
+            // if ($result) {
+            //     // if ($request->session()->has('cart')) {
+            //     //     $request->session()->forget('cart');
+            //     // }
+    
+            //     // $request->session()->flash('paid', 'Ticket Purchased successfully');
+    
+            //     // if ($referral) {
+            //     //     $this->referralOrderProcess($referral, $total_amount);
+            //     //     return redirect()->route('order.referral', $referral);
+            //     // }
+            //     return back();
+            // }
+        }
+        return redirect()->to('/');
+    }
+
 }

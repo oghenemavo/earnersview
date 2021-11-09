@@ -13,6 +13,11 @@
                     Earnings 
                 </a>
             </li>
+            <li>
+                <a href="library.html"><i class="fa fa-list"></i>
+                    Transactions History 
+                </a>
+            </li>
             <!-- Library Menu -->
             <li>
                 <a href="{{ route('user.settings') }}"><i class="fa fa-cog"></i>

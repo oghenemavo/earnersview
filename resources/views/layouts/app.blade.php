@@ -55,7 +55,7 @@
                                                 <ul class="sub-menu">
                                                     @foreach($categories as $category)
                                                         <li class="menu-item">
-                                                            <a href="single-movie.html">{{ $category->category }}</a>
+                                                            <a href="{{ $category->slug }}">{{ $category->category }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>

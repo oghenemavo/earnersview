@@ -25,6 +25,8 @@
 </div>
 <!-- breadcrumb -->
 
+<x-membership/>
+
 <!-- Register -->
 <section class="gen-section-padding-3 gen-library">
     <div class="container">
@@ -46,13 +48,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="referral">Referral Code</label>
+                            <input type="text" id="referral" class="input form-control" readonly >
+                        </div>
+
+                        <div class="form-group">
                             <label for="bank">Bank Name</label>
-                            <input type="text" id="bank" class="input form-control" readonly >
+                            <input type="text" id="bank" class="input form-control" value="{{ auth()->user()->referral_code }}" readonly >
                         </div>
 
                         <div class="form-group">
                             <label for="account">Account Number</label>
-                            <input type="text" id="account" class="input form-control" readonly value="{{ auth()->user()->bank_account ?? 'Not filled' }}">
+                            <input type="text" id="account" class="input form-control" value="{{ auth()->user()->bank_account ?? 'Not filled' }}" readonly>
                         </div>
 
                         <a href="{{ route('user.account') }}" class="btn btn-outline-primary mt-3"><i class="fas fa-edit mr-2"></i>Edit Profile</a>

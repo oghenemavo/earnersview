@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
+use App\Models\Promotion;
 use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $data['page_title'] = 'Home - Earner\'s View';
-    $data['videos'] = Video::all();
+    $data['slider'] = Video::where('status', '1')->orderBy('created_at', 'desc')->limit(4)->get();
+    $data['feed'] = Video::where('status', '1')->get();
+    $data['promotions'] = Promotion::where('status', '1')->get();
     return view('welcome', $data);
 });
 Route::get('how-it-works', function () {
@@ -34,6 +38,8 @@ Route::get('faq', function () {
 Route::get('contact', function () {
     return view('contact');
 });
+
+// Route::get('{category:slug}', [HomeController::class, 'category'])->name('category');
 
 Auth::routes();
 
@@ -58,6 +64,9 @@ Route::name('user.')->group(function() {
         Route::put('update/profile', [UserController::class, 'updateProfile'])->name('update.profile');
         Route::get('edit/account', [UserController::class, 'account'])->name('account');
         Route::put('update/account', [UserController::class, 'updateAccount'])->name('update.account');
+        
+        Route::get('setup/membership', [UserController::class, 'setMembership'])->name('pay.membership');
+        Route::get('process/payments', [UserController::class, 'paymentProcess'])->name('payment.process');
     });
 
 });

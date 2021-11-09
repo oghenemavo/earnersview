@@ -5,23 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Promotion extends Model
+class Transaction extends Model
 {
     use HasFactory;
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title',
-        'material',
-        'status',
+        'user_id',
+        'email',
+        'amount',
+        'tx_ref',
+        'is_confirmed',
+        'confirmed_at',
     ];
-    
-    public function getMaterialPathAttribute()
-    {
-        return asset("promotions/$this->material");
-    }
 }

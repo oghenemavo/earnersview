@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'referral_code',
     ];
 
     /**
@@ -41,6 +42,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function membership()
+    {
+        return $this->hasOne(Membership::class);
+    }
 
     public function emailExists(string $email, $ignore_id = null)
     {
