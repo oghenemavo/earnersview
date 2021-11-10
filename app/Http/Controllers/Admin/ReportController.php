@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
+use App\Models\Membership;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -21,36 +22,27 @@ class ReportController extends Controller
         $result = FlutterwaveFacade::verifyTransaction($tx_ref);
 
         if ($result && $result->status == 'successful') {
-            $orders = json_decode($result->meta[2]->metavalue, true);
+            // $orders = json_decode($result->meta[2]->metavalue, true);
             // Order::insert($orders);
-            Transaction::where('tx_ref', $tx_ref)->update(['is_confirmed' => '1']);
-            
+            $transaction = Transaction::where('tx_ref', $tx_ref)->firstOrFail();update(['is_confirmed' => '1']);
+            $transaction->is_confirmed = '1';
 
+            $transaction->save();
+
+            // Retrieve membership by user_id or instantiate with the reference and amount attributes...
+            $membership = Membership::firstOrCreate(
+                ['user_id' => $transaction->user_id],
+                ['reference' => $tx_ref, 'amount' => $result->data->charged_amount,]
+            );
+            
             // send email
             $notification = [];
-            $dbOrders = Order::where('transaction_id', $orders[0]['transaction_id'])->get();
-            foreach ($dbOrders as $order) {
-                $data['order'] = $order;
-                
-                $html = view('email.ticket-receipt', $data)->render();
-                $notification[] = [
-                    'email' => $order->email,
-                    'name' => $order->lastname . ' ' . $order->firstname,
-                    'subject' => 'Ticket ' . $order->event->title,
-                    'body' => $html,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
-                ];
-            }
 
-            if (count($notification)) {
-                Notification::insert($notification);
-            }
+            // if (count($notification)) {
+            //     Notification::insert($notification);
+            // }
             if ($request->ajax()) {
                 return response()->json(['success' => 'Transaction Verified Successfully!']);
-            } else {
-                $request->session()->flash('paid', 'Ticket Purchased successfully');
-                return back();
             }
         }
         if ($request->ajax()) {

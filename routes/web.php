@@ -23,24 +23,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $data['page_title'] = 'Home - Earner\'s View';
-    $data['slider'] = Video::where('status', '1')->orderBy('created_at', 'desc')->limit(4)->get();
-    $data['feed'] = Video::where('status', '1')->get();
-    $data['promotions'] = Promotion::where('status', '1')->get();
-    return view('welcome', $data);
-});
-Route::get('how-it-works', function () {
-    return view('how-it-works');
-});
-Route::get('faq', function () {
-    return view('faq');
-});
-Route::get('contact', function () {
-    return view('contact');
-});
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('how-it-works', [HomeController::class, 'standards'])->name('standards');
+Route::get('faq', [HomeController::class, 'faq'])->name('faq');
+Route::get('contact', [HomeControlle::class, 'contact'])->name('contact');
 
-// Route::get('{category:slug}', [HomeController::class, 'category'])->name('category');
+Route::get('{category:slug}', [HomeController::class, 'category'])->name('category');
+Route::get('video/{video:slug}', [HomeController::class, 'video'])->name('video');
 
 Auth::routes();
 

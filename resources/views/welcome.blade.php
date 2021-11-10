@@ -42,7 +42,7 @@
                                                     </div>
                                                     <div class="gen-movie-action">
                                                         <div class="gen-btn-container button-1">
-                                                            <a href="single-movie.html" class="gen-button">
+                                                            <a href="{{ route('video', $video->slug) }}" class="gen-button">
                                                                 <span class="text">Play Now</span>
                                                             </a>
                                                         </div>

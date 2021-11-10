@@ -48,6 +48,23 @@
                                 <span class="nk-menu-text">Users</span>
                             </a>
                         </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
+                                <span class="nk-menu-text">Reports</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('admin.report.transactions') }}" class="nk-menu-link"><span class="nk-menu-text">Transactions</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('admin.report.payouts') }}" class="nk-menu-link"><span class="nk-menu-text">Payouts</span></a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('admin.report.referrals') }}" class="nk-menu-link"><span class="nk-menu-text">Referrals</span></a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li><!-- .nk-menu-item -->
                         <li class="nk-menu-item">
                             <a href="{{ route('admin.settings') }}" class="nk-menu-link">
                                 <span class="nk-menu-icon"><em class="icon ni ni-lock-alt"></em></span>

@@ -169,7 +169,7 @@ class Flutterwave
     }
 
     public function verifyTransaction($transaction_id) {
-        $query = ['SECKEY' =>  $this->key, 'txref'=> $transaction_id];
+        $query = ['SECKEY' =>  $this->_key, 'txref'=> $transaction_id];
         $data_string = json_encode($query);
 
         $ch = curl_init('https://api.ravepay.co/flwv3-pug/getpaidx/api/v2/verify'); 
