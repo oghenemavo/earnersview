@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\ReportController as UserReportController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,10 @@ Route::name('user.')->group(function () {
 
         Route::get('setup/membership', [UserController::class, 'setMembership'])->name('pay.membership');
         Route::get('process/payments', [UserController::class, 'paymentProcess'])->name('payment.process');
+
+        Route::prefix('report')->name('report.')->group(function() {
+            Route::get('transactions', [UserReportController::class, 'transactions'])->name('transactions');
+        });
     });
 });
 
@@ -131,5 +136,8 @@ Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::get('all/transactions', [AjaxController::class, 'allTransactions'])->name('get.all.transactions');
         Route::get('all/referrals', [AjaxController::class, 'allReferrals'])->name('get.all.referrals');
         Route::get('all/payouts', [AjaxController::class, 'allPayouts'])->name('get.all.payouts');
+
+        // unique result
+        Route::get('user/{user}/transactions', [AjaxController::class, 'userTransactions'])->name('get.user.transactions');
     });
 });

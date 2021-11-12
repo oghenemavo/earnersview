@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasOne(Membership::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function emailExists(string $email, $ignore_id = null)
     {
         $user = static::where('email', $email)->first();

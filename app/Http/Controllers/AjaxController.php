@@ -160,5 +160,21 @@ class AjaxController extends Controller
         });
         return response()->json(['payouts' => $mapped_payouts]);
     }
+
+    public function userTransactions(User $user)
+    {
+        $transaction_collection = $user->transactions()->where('is_confirmed','1')->get();
+        $mapped_transactions = $transaction_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['amount'] = $item->amount;
+            $data['reference'] = $item->tx_ref;
+            $data['status'] = $item->is_confirmed;
+            $data['confirmed_at'] = $item->confirmed_at;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['transactions' => $mapped_transactions]);
+    }
     
 }
