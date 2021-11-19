@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Membership;
 use App\Models\Transaction;
+use App\Models\Video;
+use App\Models\VideoLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -180,6 +182,40 @@ class UserController extends Controller
             // }
         }
         return redirect()->to('/');
+    }
+
+    public function logVideo(Request $request, Video $video)
+    {
+        $user = auth()->guard('web')->user();
+
+        $played = $request->played;
+
+        $validPlayed = filter_var($played, FILTER_VALIDATE_FLOAT, [
+            'options' => [
+                'min_range' => $video->earned_after, 
+                'max_range' => $played,
+            ]
+        ]);
+
+        if ($validPlayed) {
+            $log = [
+                'user_id' => $user->id,
+                'video_id' => $video->id,
+                'watched' => $played,
+                'credit' => $video->earnable,
+            ];
+            
+            $i = VideoLog::firstOrCreate(
+                ['user_id' => $user->id, 'video_id' => $video->id],
+                $log
+            );
+            
+            if ($i->wasRecentlyCreated) {
+                return response()->json(['success' => true]);
+            }
+            return response()->json(['success' => false]);
+        }
+        return response()->json(['error' => true]);
     }
 
 }

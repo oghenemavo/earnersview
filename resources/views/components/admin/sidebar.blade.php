@@ -63,6 +63,9 @@
                                 <li class="nk-menu-item">
                                     <a href="{{ route('admin.report.referrals') }}" class="nk-menu-link"><span class="nk-menu-text">Referrals</span></a>
                                 </li>
+                                <li class="nk-menu-item">
+                                    <a href="{{ route('admin.report.video-logs') }}" class="nk-menu-link"><span class="nk-menu-text">Video Logs</span></a>
+                                </li>
                             </ul><!-- .nk-menu-sub -->
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-item">

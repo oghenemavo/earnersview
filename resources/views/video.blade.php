@@ -9,10 +9,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="gen-video-holder">
-                            <iframe width="100%" height="550px" src="https://www.youtube.com/embed/{{ $video->video_id }}"
+                            <iframe id="existing-iframe-example"
+                                width="100%" height="550px" src="https://www.youtube.com/embed/{{ $video->video_id }}?enablejsapi=1&disablekb=1&modestbranding=1&rel=0"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+                                allowfullscreen>
+                            </iframe>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -130,3 +132,91 @@
 </section>
 <!-- Single Video End -->
 @endsection
+
+@push('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var payoutDuration = `{{ $video->earned_after }}`;
+
+        var tag = document.createElement('script');
+        tag.id = 'iframe-demo';
+        tag.src = 'https://www.youtube.com/iframe_api';
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('existing-iframe-example', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onPlaybackRateChange': onPlayerPlaybackRateChange,
+                    'onError': onPlayerError
+                }
+            });
+        }
+
+        function onPlayerReady(event) { // Player has finised loading and is ready to begin receiving API calls
+        }
+
+        var done = false;
+        function onPlayerStateChange(event) { // Whenever player state changes
+            // check if video is playing
+            videoPlayer(event);
+        }
+
+        function onPlayerPlaybackRateChange(event) {}
+        function onPlayerError() {}
+
+        function videoPlayer(event) {
+            // video is still playing
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                var payoutTimer = setInterval(validForPayout, 1000); // run interval every second
+                function validForPayout() {
+                    console.log('Current Play time: ', player.getCurrentTime());
+                    console.log('payoutDuration: ', payoutDuration);
+                    if (player.getCurrentTime() >= payoutDuration) {
+                        clearInterval(payoutTimer);
+                        done = true;
+                        console.log("payout eligible");
+
+                        $.post("{{ route('user.report.log.video', $video->id) }}",
+                            {
+                                "_token": `{{ csrf_token() }}`,
+                                played: player.getCurrentTime(),
+                            },
+                            function (data, textStatus, jqXHR) {
+                                console.log(data)
+                                if (data.success) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: `Your wallet has been credited with &#8358;{{ $video->earnable }}`,
+                                        showConfirmButton: false,
+                                        timer: 3500,
+                                    })
+                                }
+
+                                if (data.error) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'danger',
+                                        title: `Unable to approve video activity`,
+                                        showConfirmButton: false,
+                                        timer: 3500,
+                                    })
+                                }
+                            },
+                            "json"
+                        );
+                    }
+                }
+            }
+        }
+
+        function between(x, min, max) {
+            return x >= min && x <= max;
+        }
+    </script>
+
+@endpush

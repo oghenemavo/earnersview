@@ -65,4 +65,10 @@ class ReportController extends Controller
         return view('admin.report.payout', $data);
     }
 
+    public function videoLogs()
+    {
+        $data['page_title'] = 'All Video Logs';
+        return view('admin.report.video-logs', $data);
+    }
+
 }

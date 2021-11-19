@@ -35,7 +35,7 @@
                                                                 2018
                                                             </li>
                                                             <li>
-                                                                <a href="action.html"><span>{{ $video->category->category }}</span></a>
+                                                                <a href="{{ route('category', $video->category->category) }}"><span>{{ $video->category->category }}</span></a>
                                                             </li>
                                                         </ul>
                                                         <p>{{ strip_tags(htmlspecialchars_decode(Str::limit($video->description, 253))) }}</p>
@@ -47,8 +47,8 @@
                                                             </a>
                                                         </div>
                                                         <div class="gen-btn-container button-2">
-                                                            <a href="{{ $video->url }}"
-                                                                class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
+                                                            <a href="{{ route('video', $video->slug) }}"
+                                                                class="gen-button gen-button-link">
                                                                 <i aria-hidden="true" class="ion ion-play"></i> 
                                                                 <span class="text">Watch Trailer</span>
                                                             </a>
@@ -130,14 +130,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="gen-movie-action">
-                                                    <a href="single-movie.html" class="gen-button">
+                                                    <a href="{{ route('video', $video->slug) }}" class="gen-button">
                                                         <i class="fa fa-play"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="gen-info-contain">
                                                 <div class="gen-movie-info">
-                                                    <h3><a href="single-movie.html">My Generation</a>
+                                                    <h3><a href="{{ route('video', $video->slug) }}">{{ $video->title }}</a>
                                                     </h3>
                                                 </div>
                                                 <div class="gen-movie-meta-holder">
