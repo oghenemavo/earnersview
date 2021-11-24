@@ -10,7 +10,7 @@
                     <div class="col-lg-12">
                         <div class="gen-video-holder">
                             <iframe id="existing-iframe-example"
-                                width="100%" height="550px" src="https://www.youtube.com/embed/{{ $video->video_id }}?enablejsapi=1&disablekb=1&modestbranding=1&rel=0"
+                                width="100%" height="550px" src="https://www.youtube.com/embed/{{ $video->video_id }}?enablejsapi=1&disablekb=1&modestbranding=1&rel=0&controls=0"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen>

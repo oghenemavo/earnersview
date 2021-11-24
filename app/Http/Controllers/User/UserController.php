@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Membership;
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\Video;
 use App\Models\VideoLog;
 use Carbon\Carbon;
@@ -216,6 +217,18 @@ class UserController extends Controller
             return response()->json(['success' => false]);
         }
         return response()->json(['error' => true]);
+    }
+
+    public function requestPayout(Request $request)
+    {
+        $user = auth()->guard('web')->user();
+        $balance = $request->balance;
+        $user->wallet->balance = '0.00';
+        $user->wallet->ledger_balance += $balance;
+        if ($user->wallet->save()) {
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false]);
     }
 
 }

@@ -51,9 +51,12 @@ Route::name('user.')->group(function () {
         Route::get('setup/membership', [UserController::class, 'setMembership'])->name('pay.membership');
         Route::get('process/payments', [UserController::class, 'paymentProcess'])->name('payment.process');
 
+        Route::post('user/request/payout', [UserController::class, 'requestPayout'])->name('request.payout');
+
         Route::prefix('report')->name('report.')->group(function() {
             Route::get('transactions', [UserReportController::class, 'transactions'])->name('transactions');
             Route::post('video-log/{video}', [UserController::class, 'logVideo'])->name('log.video');
+            Route::get('earnings', [UserReportController::class, 'earnings'])->name('earnings');
         });
     });
 });
@@ -139,6 +142,8 @@ Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::get('all/referrals', [AjaxController::class, 'allReferrals'])->name('get.all.referrals');
         Route::get('all/payouts', [AjaxController::class, 'allPayouts'])->name('get.all.payouts');
         Route::get('all/video-logs', [AjaxController::class, 'allVideoLogs'])->name('get.all.video.logs');
+        
+        Route::get('user/{user}/video-logs', [AjaxController::class, 'userVideoLogs'])->name('get.user.video.logs');
 
         // unique result
         Route::get('user/{user}/transactions', [AjaxController::class, 'userTransactions'])->name('get.user.transactions');

@@ -12,4 +12,11 @@ class ReportController extends Controller
         $data['page_title'] = 'My Transactions';
         return view('user.report.transaction', $data);
     }
+    
+    public function earnings()
+    {
+        $data['page_title'] = 'My Earnings';
+        $data['balance'] = auth()->guard('web')->user()->wallet->balance ?? '0.00';
+        return view('user.report.earnings', $data);
+    }
 }

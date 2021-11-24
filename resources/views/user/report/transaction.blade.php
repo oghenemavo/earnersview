@@ -18,7 +18,7 @@
                     </div>
                     <div class="gen-breadcrumb-container">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="fas fa-home mr-2"></i>Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}"><i class="fas fa-home mr-2"></i>Home</a></li>
                             <li class="breadcrumb-item active">Transactions Report</li>
                         </ol>
                     </div>

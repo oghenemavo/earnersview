@@ -196,4 +196,20 @@ class AjaxController extends Controller
         return response()->json(['video_logs' => $mapped_videoLog]);
     }
     
+    public function userVideoLogs(User $user)
+    {
+        $videoLog_collection = $user->videoLogs()->get();
+        $mapped_videoLog = $videoLog_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['video'] = $item->video->title;
+            $data['watched'] = number_format((float) $item->watched, 2);
+            $data['amount'] = $item->credit;
+            $data['status'] = $item->is_credited;
+            $data['credited_at'] = $item->updated_at > $item->created_at ? $item->updated_at : "n/a";
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['video_logs' => $mapped_videoLog]);
+    }
 }

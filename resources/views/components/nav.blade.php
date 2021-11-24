@@ -9,12 +9,12 @@
                 </a>
             </li>
             <li>
-                <a href="library.html"><i class="fa fa-list"></i>
+                <a href="{{ route('user.report.earnings') }}"><i class="fa fa-list"></i>
                     Earnings 
                 </a>
             </li>
             <li>
-                <a href="library.html"><i class="fa fa-list"></i>
+                <a href="{{ route('user.report.transactions') }}"><i class="fa fa-list"></i>
                     Transactions History 
                 </a>
             </li>

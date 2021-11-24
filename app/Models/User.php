@@ -47,10 +47,20 @@ class User extends Authenticatable
     {
         return $this->hasOne(Membership::class);
     }
+    
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
 
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function videoLogs()
+    {
+        return $this->hasMany(VideoLog::class);
     }
 
     public function emailExists(string $email, $ignore_id = null)
