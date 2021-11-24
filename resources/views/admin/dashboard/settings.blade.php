@@ -20,6 +20,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#email"><em class="icon ni ni-user"></em><span>Account</span></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#settings"><em class="icon ni ni-setting"></em><span>Site Settings</span></a>
+                        </li>
                     </ul><!-- .nav-tabs -->
 
                     <div class="card-inner">
@@ -76,7 +79,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-lg btn-primary">Update Password</button>
+                                    <button type="submit" class="btn btn-lg btn-primary"><em class="icon ni ni-lock-alt"></em> Update Password</button>
                                 </form>
                             </div>
 
@@ -100,11 +103,40 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-lg btn-primary">Update Email</button>
+                                    <button type="submit" class="btn btn-lg btn-primary"><em class="icon ni ni-user"></em> Update Email</button>
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="settings">
+                                <form id="update_site_settings" action="{{ route('admin.update.site.settings') }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    
+                                    @foreach($site_settings as $settings)
+                                        <div class="form-group">
+                                            <div class="form-label-group">
+                                                <label class="form-label" for="{{ $settings->slug }}">{{ $settings->name }}</label>
+                                            </div>
+                                            <div class="form-control-wrap">
+                                                <input type="text" class="form-control form-control-lg  @error('{{ $settings->slug }}') is-invalid @enderror"
+                                                id="{{ $settings->slug }}" name="{{ $settings->slug }}" value="{{ $settings->meta }}">
+                                                
+                                                @error('{{ $settings->slug }}')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-note">{{ $settings->description }}</div>
+                                        </div>
+                                    @endforeach
+
+                                    <button type="submit" class="btn btn-lg btn-primary"><em class="icon ni ni-setting"></em> Update Site Settings</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+
                 </div><!-- .card-content -->
             </div><!-- .card-aside-wrap -->
         </div><!-- .card -->

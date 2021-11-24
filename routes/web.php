@@ -78,6 +78,7 @@ Route::prefix('admin')->group(function () {
             Route::get('settings', [AdminController::class, 'settings'])->name('settings');
             Route::put('update/password', [AdminController::class, 'updatePassword'])->name('update.password');
             Route::put('update/email', [AdminController::class, 'emailPassword'])->name('update.email');
+            Route::put('update/site/settings', [AdminController::class, 'siteSettings'])->name('update.site.settings');
 
             Route::get('manage/users', [AdminController::class, 'users'])->name('users');
             Route::put('suspend/user', [AdminController::class, 'suspendUser'])->name('suspend.user');

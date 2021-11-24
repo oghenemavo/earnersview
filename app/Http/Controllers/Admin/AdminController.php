@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,7 @@ class AdminController extends Controller
     public function settings()
     {
         $data['page_title'] = 'Admin Settings';
+        $data['site_settings'] = Setting::all();
         return view('admin.dashboard.settings', $data);
     }
     
@@ -105,6 +107,25 @@ class AdminController extends Controller
             return back()->with('success', 'Account Email changed successfully!');
         }
         return back()->with('info', 'No changes made!');
+    }
+    
+    public function siteSettings(Request $request)
+    {
+        $rules = [
+            'subscription' => 'required',
+            'min_payout' => 'required',
+            'max_videos' => 'required',
+            'referral_percentage' => 'required',
+        ];
+
+        $request->validate($rules);
+
+        Setting::where('slug', 'subscription')->update(['meta' => $request->subscription]);
+        Setting::where('slug', 'min_payout')->update(['meta' => $request->min_payout]);
+        Setting::where('slug', 'max_videos')->update(['meta' => $request->max_videos]);
+        Setting::where('slug', 'referral_percentage')->update(['meta' => $request->referral_percentage]);
+
+        return back()->with('success', 'Site Settings changed successfully!');
     }
 
 }
