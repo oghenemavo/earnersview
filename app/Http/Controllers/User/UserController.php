@@ -149,7 +149,9 @@ class UserController extends Controller
                 // check if this user is referred
                 $refer_info = Referral::where('referred_user_id', $user_id)->first();
                 if ($refer_info) {
-                    $refer_info->bonus = $total_amount;
+                    $bonus_percent = Setting::where('slug', 'referral_percentage')->first()->meta;
+
+                    $refer_info->bonus = $total_amount * $bonus_percent;
                     $refer_info->status = '1';
                     $refer_info->bonus_at = Carbon::now();
                     $refer_info->save();
