@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Promotion;
+use App\Models\Setting;
 use App\Models\Video;
+use App\Models\VideoLog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExploreController extends Controller
@@ -51,6 +54,14 @@ class ExploreController extends Controller
         $data['video'] = $video;
         $data['latest_videos'] = Video::where('category_id', $video->category_id)
         ->where('status', '1')->orderby('created_at', 'desc')->limit('10')->get();
+        
+        $user = auth()->guard('web')->user();
+        $data['user'] = $user;
+        if ($user) {
+            $data['subscription'] = is_null(auth()->guard('web')->user()->membership);
+            $data['max_videos'] = Setting::where('slug', 'max_videos')->first()->meta;
+            $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
+        }
         return view('video', $data);
     }
 }

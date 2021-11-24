@@ -37,7 +37,7 @@
                 <div class=" p-4 mb-3" style="display: inline-block;">
                     <span>Wallet Balance:</span>
                     <h1 class="text-dark">&#8358;{{ $balance }}</h1>
-                    <button data-balance="{{ $balance }}" id="payout" class="btn btn-outline-primary">Payout</button>
+                    <button data-min="{{ $min }}" data-balance="{{ $balance }}" id="payout" class="btn btn-outline-primary">Payout</button>
                 </div>
                 <table id="earnings_table" class="table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -69,7 +69,7 @@
 <script>
     $(document).ready(function() {
         $('#payout').click(function () { 
-            if ($(this).attr('data-balance') > 0) {
+            if ($(this).attr('data-balance') > $(this).attr('data-min')) {
                 $.post("{{ route('user.request.payout') }}",
                     {
                         "_token": `{{ csrf_token() }}`,
@@ -102,7 +102,7 @@
                 Swal.fire({
                     position: 'top-end',
                     icon: 'warning',
-                    title: `Insufficient Balance`,
+                    title: `Insufficient Balance, Min Payout is &#8358;{{ $min }} `,
                     showConfirmButton: false,
                     timer: 3500,
                 })

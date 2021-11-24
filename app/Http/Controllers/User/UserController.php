@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Membership;
+use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Video;
@@ -111,11 +112,12 @@ class UserController extends Controller
 
     public function setMembership()
     {
+        $amt = Setting::where('slug', 'subscription')->first()->meta;
         $transaction = [
             'details' => 'Membership',
             'email' =>  auth()->guard('web')->user()->email,
             'name' =>  auth()->guard('web')->user()->name,
-            'amount' => env('SUBSCRIPTION_FEE'),
+            'amount' => $amt ?? env('SUBSCRIPTION_FEE'),
             'tx_ref' => strtolower(bin2hex(openssl_random_pseudo_bytes(10))),
             'user_id' => auth()->guard('web')->user()->id,
         ];

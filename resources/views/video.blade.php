@@ -133,90 +133,94 @@
 <!-- Single Video End -->
 @endsection
 
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        var payoutDuration = `{{ $video->earned_after }}`;
+@if($user)
+    @if(!$subscription || ($subscription && ($watched_count < $max_videos) ) )
+        @push('scripts')
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                var payoutDuration = `{{ $video->earned_after }}`;
 
-        var tag = document.createElement('script');
-        tag.id = 'iframe-demo';
-        tag.src = 'https://www.youtube.com/iframe_api';
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                var tag = document.createElement('script');
+                tag.id = 'iframe-demo';
+                tag.src = 'https://www.youtube.com/iframe_api';
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('existing-iframe-example', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onPlaybackRateChange': onPlayerPlaybackRateChange,
-                    'onError': onPlayerError
+                var player;
+                function onYouTubeIframeAPIReady() {
+                    player = new YT.Player('existing-iframe-example', {
+                        events: {
+                            'onReady': onPlayerReady,
+                            'onStateChange': onPlayerStateChange,
+                            'onPlaybackRateChange': onPlayerPlaybackRateChange,
+                            'onError': onPlayerError
+                        }
+                    });
                 }
-            });
-        }
 
-        function onPlayerReady(event) { // Player has finised loading and is ready to begin receiving API calls
-        }
+                function onPlayerReady(event) { // Player has finised loading and is ready to begin receiving API calls
+                }
 
-        var done = false;
-        function onPlayerStateChange(event) { // Whenever player state changes
-            // check if video is playing
-            videoPlayer(event);
-        }
+                var done = false;
+                function onPlayerStateChange(event) { // Whenever player state changes
+                    // check if video is playing
+                    videoPlayer(event);
+                }
 
-        function onPlayerPlaybackRateChange(event) {}
-        function onPlayerError() {}
+                function onPlayerPlaybackRateChange(event) {}
+                function onPlayerError() {}
 
-        function videoPlayer(event) {
-            // video is still playing
-            if (event.data == YT.PlayerState.PLAYING && !done) {
-                var payoutTimer = setInterval(validForPayout, 1000); // run interval every second
-                function validForPayout() {
-                    console.log('Current Play time: ', player.getCurrentTime());
-                    console.log('payoutDuration: ', payoutDuration);
-                    if (player.getCurrentTime() >= payoutDuration) {
-                        clearInterval(payoutTimer);
-                        done = true;
-                        console.log("payout eligible");
+                function videoPlayer(event) {
+                    // video is still playing
+                    if (event.data == YT.PlayerState.PLAYING && !done) {
+                        var payoutTimer = setInterval(validForPayout, 1000); // run interval every second
+                        function validForPayout() {
+                            console.log('Current Play time: ', player.getCurrentTime());
+                            console.log('payoutDuration: ', payoutDuration);
+                            if (player.getCurrentTime() >= payoutDuration) {
+                                clearInterval(payoutTimer);
+                                done = true;
+                                console.log("payout eligible");
 
-                        $.post("{{ route('user.report.log.video', $video->id) }}",
-                            {
-                                "_token": `{{ csrf_token() }}`,
-                                played: player.getCurrentTime(),
-                            },
-                            function (data, textStatus, jqXHR) {
-                                console.log(data)
-                                if (data.success) {
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: `Your wallet has been credited with &#8358;{{ $video->earnable }}`,
-                                        showConfirmButton: false,
-                                        timer: 3500,
-                                    })
-                                }
+                                $.post("{{ route('user.report.log.video', $video->id) }}",
+                                    {
+                                        "_token": `{{ csrf_token() }}`,
+                                        played: player.getCurrentTime(),
+                                    },
+                                    function (data, textStatus, jqXHR) {
+                                        console.log(data)
+                                        if (data.success) {
+                                            Swal.fire({
+                                                position: 'top-end',
+                                                icon: 'success',
+                                                title: `Your wallet has been credited with &#8358;{{ $video->earnable }}`,
+                                                showConfirmButton: false,
+                                                timer: 3500,
+                                            })
+                                        }
 
-                                if (data.error) {
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'danger',
-                                        title: `Unable to approve video activity`,
-                                        showConfirmButton: false,
-                                        timer: 3500,
-                                    })
-                                }
-                            },
-                            "json"
-                        );
+                                        if (data.error) {
+                                            Swal.fire({
+                                                position: 'top-end',
+                                                icon: 'danger',
+                                                title: `Unable to approve video activity`,
+                                                showConfirmButton: false,
+                                                timer: 3500,
+                                            })
+                                        }
+                                    },
+                                    "json"
+                                );
+                            }
+                        }
                     }
                 }
-            }
-        }
 
-        function between(x, min, max) {
-            return x >= min && x <= max;
-        }
-    </script>
+                function between(x, min, max) {
+                    return x >= min && x <= max;
+                }
+            </script>
 
-@endpush
+        @endpush
+    @endif
+@endif
