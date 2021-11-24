@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Membership;
+use App\Models\Referral;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
@@ -145,6 +146,15 @@ class UserController extends Controller
             );
 
             if ($membership) {
+                // check if this user is referred
+                $refer_info = Referral::where('referred_user_id', $user_id)->first();
+                if ($refer_info) {
+                    $refer_info->bonus = $total_amount;
+                    $refer_info->status = '1';
+                    $refer_info->bonus_at = Carbon::now();
+                    $refer_info->save();
+                }
+
                 return back()->with('success', 'payment successful, you have subscribed');
             }
 

@@ -9,9 +9,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <form id="pms_register-form" class="pms-form"  method="POST" action="{{ route('register') }}">
+                    <form id="pms_register-form" class="pms-form"  method="POST" action="{{ route('user.create') }}">
                         @csrf
                         <h4>{{ __('Register') }}</h4>
+
+                        <input type="hidden" name="referral" value="{{ $referral }}">
 
                         <div class="row">
                             <div class="col">

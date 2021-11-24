@@ -15,8 +15,8 @@ class CreateReferralsTable extends Migration
     {
         Schema::create('referrals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('referrer_user_id')->comment("Owner of referral link");
-            $table->foreignId('referred_user_id')->comment("User of referral link");
+            $table->foreignId('referrer_user_id')->constrained('users')->comment("Owner of referral link");
+            $table->foreignId('referred_user_id')->constrained('users')->comment("User of referral link");
             $table->decimal('bonus', 11, 2)->default(0);
             $table->enum('status', ['0', '1', '2'])->default(0)->comment("0=n/a, 1=bonus in, 2=bonus out email");
             $table->timestamp('bonus_at')->nullable()->default(null)->comment("Time of bonus entry");

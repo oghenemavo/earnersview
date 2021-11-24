@@ -42,7 +42,7 @@ class AjaxController extends Controller
             $data['email'] = $item->email;
             $data['bank_code'] = $item->bank_code;
             $data['bank_account'] = $item->bank_account;
-            $data['balance'] = 500;
+            $data['balance'] = $item->wallet->balance ?? '0.00';
             $data['email_verified_at'] = $item->email_verified_at ? true : false;
             $data['referred_by'] = $item->referred_by;
             $data['is_active'] = $item->is_active;

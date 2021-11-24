@@ -29,6 +29,17 @@
     <!-- Action Movies -->
     <section class="gen-section-padding-3">
         <div class="container">
+
+            <!-- notifications alert -->
+            @foreach(['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'gray', 'light'] as $alert)
+                @if(session()->has($alert))
+                    <x-alert type="{{ $alert }}" :message="session()->get($alert)"/>
+                @endif
+            @endforeach
+            <!-- notifications alert -->
+
+
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">                     
