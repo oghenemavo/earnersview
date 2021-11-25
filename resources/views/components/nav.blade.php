@@ -14,6 +14,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('user.report.referrals') }}"><i class="fa fa-users"></i>
+                    Referrals
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('user.report.transactions') }}"><i class="fa fa-list"></i>
                     Transactions History 
                 </a>

@@ -13,13 +13,13 @@
                 <nav aria-label="breadcrumb">
                     <div class="gen-breadcrumb-title">
                         <h1>
-                            Earnings Report
+                            Referrals Report
                         </h1>
                     </div>
                     <div class="gen-breadcrumb-container">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}"><i class="fas fa-home mr-2"></i>Home</a></li>
-                            <li class="breadcrumb-item active">Earnings</li>
+                            <li class="breadcrumb-item active">Referrals</li>
                         </ol>
                     </div>
                 </nav>
@@ -34,18 +34,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <div class="py-4 mb-3" style="display: inline-block;">
-                    <span>Wallet Balance:</span>
-                    <h1 class="text-dark">&#8358;{{ $balance }}</h1>
-                    <button data-min="{{ $min }}" data-balance="{{ $balance }}" id="payout" class="btn btn-outline-primary">Payout</button>
-                </div>
-                <table id="earnings_table" class="table table-striped table-bordered" style="width:100%">
+                <h5>Referral ID: {{ auth()->guard('web')->user()->referral_code }}</h5>
+                <table id="referrals_table" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Video</th>
+                            <th>Referred</th>
                             <th>Amount</th>
+                            <th>Bonus at</th>
                             <th>Status</th>
-                            <th>Watched at</th>
+                            <th>Referred at</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,80 +65,45 @@
 
 <script>
     $(document).ready(function() {
-        $('#payout').click(function () { 
-            if ($(this).attr('data-balance') > $(this).attr('data-min')) {
-                $.post("{{ route('user.request.payout') }}",
-                    {
-                        "_token": `{{ csrf_token() }}`,
-                        balance: `{{ $balance }}`,
-                    },
-                    function (data, textStatus, jqXHR) {
-                        if (data.success) {
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: `&#8358;{{ $balance }} has been approved for payout`,
-                                showConfirmButton: false,
-                                timer: 3500,
-                            })
-                        }
-
-                        if (data.error) {
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'danger',
-                                title: `Unable to process payout`,
-                                showConfirmButton: false,
-                                timer: 3500,
-                            })
-                        }
-                    },
-                    "json"
-                );
-            } else {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'warning',
-                    title: `Insufficient Balance, Min Payout is &#8358;{{ $min }} `,
-                    showConfirmButton: false,
-                    timer: 3500,
-                })
-            }
-        });
-
-        $('#earnings_table').DataTable({
+        $('#referrals_table').DataTable({
             searching: false,
             lengthChange: false,
             ajax: {
-                url: `{{ route('ajax.get.user.video.logs', auth()->guard('web')->user()->id) }}`,
-                dataSrc: 'video_logs'
+                url: `{{ route('ajax.get.user.referrals') }}`,
+                dataSrc: 'referrals'
             },
-            buttons: [
-                {
-                    text: 'Reload',
-                    className: 'btn reload px-2 btn-primary btn-sm',
-                    action: function(e, dt, node, config) {
-                        dt.ajax.reload();
-                    },
+            buttons: [{
+                text: 'Reload',
+                className: 'btn reload px-2 btn-primary btn-sm',
+                action: function(e, dt, node, config) {
+                    dt.ajax.reload();
                 },
-            ],
-            columns: [
-                {
-                    data: 'video',
+            }, ],
+            columns: [{
+                    data: 'referred',
                     className: 'nk-tb-col tb-col-md'
                 },
                 {
-                    data: 'amount',
+                    data: 'bonus',
                     className: 'nk-tb-col tb-col-md',
                     render: data => `&#8358;${data}`
+                },
+                {
+                    data: 'bonus_at',
+                    className: 'nk-tb-col tb-col-lg',
+                    render: function(data) {
+                        return data == null ? `<span>${moment(data).format('DD-MM-YYYY')}</span>` : 'Not Subscribed';
+                    }
                 },
                 {
                     data: 'status',
                     className: 'nk-tb-col tb-col-md',
                     render: (data) => {
                         var stat = "";
-                        if (data == '1') {
-                            stat += `<span class="badge badge-success">Paid</span>`;
+                        if (data == '2') {
+                            stat += `<span class="badge badge-success">Bonus Received</span>`;
+                        } else if (data == '1') {
+                            stat += `<span class="badge badge-info">Bonus in</span>`;
                         } else {
                             stat += `<span class="badge badge-primary">Pending</span>`;
                         }

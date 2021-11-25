@@ -21,4 +21,10 @@ class ReportController extends Controller
         $data['balance'] = auth()->guard('web')->user()->wallet->balance ?? '0.00';
         return view('user.report.earnings', $data);
     }
+    
+    public function referrals()
+    {
+        $data['page_title'] = 'My Referrals';
+        return view('user.report.referrals', $data);
+    }
 }

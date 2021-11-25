@@ -132,10 +132,28 @@ class AjaxController extends Controller
         $mapped_referrals = $referral_collection->map(function($item, $key) {
             $data['id'] = $item->id;
             $data['referrer'] = $item->referrer->name;
-            $data['referred'] = $item->referrer->name;
+            $data['referred'] = $item->referred->name;
             $data['bonus'] = $item->bonus;
             $data['status'] = $item->status;
             $data['bonus_at'] = $item->bonus_at;
+            $data['credited_at'] = $item->credited_at;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
+        return response()->json(['referrals' => $mapped_referrals]);
+    }
+
+    public function userReferrals()
+    {
+        $user = auth()->guard('web')->user();
+        $referral_collection = Referral::where('referrer_user_id', $user->id)->get();
+        $mapped_referrals = $referral_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['referred'] = $item->referred->name;
+            $data['bonus'] = $item->bonus;
+            $data['status'] = $item->status;
+            $data['bonus_at'] = $item->bonus_at ?? 'n/a';
             $data['credited_at'] = $item->credited_at;
             $data['created_at'] = $item->created_at;
 
