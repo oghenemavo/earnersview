@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Membership;
+use App\Models\Payout;
 use App\Models\Referral;
 use App\Models\Setting;
 use App\Models\Transaction;
@@ -253,6 +254,15 @@ class UserController extends Controller
         $user->wallet->balance = '0.00';
         $user->wallet->ledger_balance += $balance;
         if ($user->wallet->save()) {
+            $payout = [
+                'user_id' => $user->id,
+                // 'reason' => 'Payout',
+                'amount' => $balance,
+                'reference' => bin2hex(openssl_random_pseudo_bytes(10)),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ];
+            Payout::create($payout);
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false]);

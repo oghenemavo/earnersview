@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\ProcessPayout::class,
         Commands\ProcessTransfer::class,
+        Commands\VerifyPayout::class,
     ];
 
     /**
@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('process:payout')->everyFiveMinutes();
         $schedule->command('process:transfer')->everyFiveMinutes();
+        $schedule->command('verify:payout')->everyFiveMinutes();
     }
 
     /**
