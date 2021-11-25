@@ -21,6 +21,8 @@
                         <tr class="nk-tb-item nk-tb-head">
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Referrer</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Referred</span></th>
+                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Amount</span></th>
+                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Tax</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Bonus</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Bonus in</span></th>
@@ -65,6 +67,8 @@
                 columns: [
                     { data: 'referrer', className: 'nk-tb-col tb-col-md' },
                     { data : 'referred', className : 'nk-tb-col tb-col-md' },
+                    { data : 'amount', className : 'nk-tb-col tb-col-md' },
+                    { data : 'tax', className : 'nk-tb-col tb-col-md', render: data => `${data}%` },
                     { data : 'bonus', className : 'nk-tb-col tb-col-md' },
                     { 
                         data : 'status', className : 'nk-tb-col tb-col-md',

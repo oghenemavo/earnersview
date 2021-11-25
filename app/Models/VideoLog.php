@@ -19,6 +19,8 @@ class VideoLog extends Model
         'video_id',
         'watched',
         'credit',
+        'tax',
+        'amount',
         'is_credited',
     ];
 

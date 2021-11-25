@@ -149,8 +149,13 @@ class UserController extends Controller
                 $refer_info = Referral::where('referred_user_id', $user_id)->first();
                 if ($refer_info) {
                     $bonus_percent = Setting::where('slug', 'referral_percentage')->first()->meta;
+                    $bonus = $total_amount * ($bonus_percent * 0.01);
 
-                    $refer_info->bonus = $total_amount * ($bonus_percent * 0.01);
+                    $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00';
+
+                    $refer_info->bonus = $bonus * $tax;
+                    $refer_info->tax = $tax;
+                    $refer_info->amount = $bonus;
                     $refer_info->status = '1';
                     $refer_info->bonus_at = Carbon::now();
                     $refer_info->save();
@@ -218,8 +223,12 @@ class UserController extends Controller
                 'watched' => $played,
             ];
 
+            $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00';
+
             if (! is_null(auth()->guard('web')->user()->membership)) {
-                $log['credit'] = $video->earnable;
+                $log['credit'] = $video->earnable * $tax;
+                $log['tax'] = $tax;
+                $log['amount'] = $video->earnable;
             } else {
                 $log['credit'] = $video->earnable_ns;
             }

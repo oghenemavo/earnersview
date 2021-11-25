@@ -13,6 +13,8 @@ class Referral extends Model
         'referrer_user_id',
         'referred_user_id',
         'bonus',
+        'tax',
+        'amount',
         'status',
         'bonus_at',
         'credited_at',

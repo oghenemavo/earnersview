@@ -134,6 +134,8 @@ class AjaxController extends Controller
             $data['referrer'] = $item->referrer->name;
             $data['referred'] = $item->referred->name;
             $data['bonus'] = $item->bonus;
+            $data['tax'] = $item->tax;
+            $data['amount'] = $item->amount;
             $data['status'] = $item->status;
             $data['bonus_at'] = $item->bonus_at;
             $data['credited_at'] = $item->credited_at;
@@ -205,7 +207,9 @@ class AjaxController extends Controller
             $data['name'] = $item->user->name;
             $data['video'] = $item->video->title;
             $data['watched'] = number_format((float) $item->watched, 2);
-            $data['amount'] = $item->credit;
+            $data['amount'] = $item->amount;
+            $data['tax'] = $item->tax ?? '0.00';
+            $data['credit'] = $item->credit;
             $data['status'] = $item->is_credited;
             $data['credited_at'] = $item->updated_at > $item->created_at ? $item->updated_at : "n/a";
             $data['created_at'] = $item->created_at;

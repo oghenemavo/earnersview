@@ -22,6 +22,8 @@
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Name</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Video</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Watched</span></th>
+                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Amount</span></th>
+                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Tax</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Credit</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Credited at</span></th>
@@ -73,8 +75,10 @@
                     className: 'nk-tb-col tb-col-md',
                     render: (data) => `${data} secs`
                 },
+                { data : 'amount', className : 'nk-tb-col tb-col-md' },
+                { data : 'tax', className : 'nk-tb-col tb-col-md', render: data => `${data}%` },
                 {
-                    data: 'amount',
+                    data: 'credit',
                     className: 'nk-tb-col tb-col-md',
                     render: (data) => `&#8358;${data}`
                 },
