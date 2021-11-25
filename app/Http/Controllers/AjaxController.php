@@ -83,6 +83,7 @@ class AjaxController extends Controller
             $data['length'] = $item->length;
             $data['charges'] = $item->charges;
             $data['earnable'] = $item->earnable;
+            $data['earnable_ns'] = $item->earnable_ns ?? '0.00';
             $data['earned_after'] = $item->earned_after;
             $data['status'] = $item->status;
             $data['created_at'] = $item->created_at;

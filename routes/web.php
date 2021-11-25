@@ -38,7 +38,8 @@ Route::name('user.')->group(function () {
     });
 
     Route::middleware(['auth:web', 'prevent_cached_history', 'verified'])->group(function () {
-        Route::view('home', 'user.dashboard.index')->name('dashboard');
+        Route::redirect('/home', '/', 301);
+        // Route::view('home', 'user.dashboard.index')->name('dashboard');
 
         Route::get('settings', [UserController::class, 'settings'])->name('settings');
         Route::put('change/settings', [UserController::class, 'changeSettings'])->name('change.settings');
@@ -59,6 +60,7 @@ Route::name('user.')->group(function () {
             Route::get('earnings', [UserReportController::class, 'earnings'])->name('earnings');
         });
     });
+    
 });
 
 /**

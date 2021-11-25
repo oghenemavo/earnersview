@@ -71,6 +71,7 @@ class MediaController extends Controller
             'length' => 'required|numeric',
             'charges' => 'required|numeric',
             'earnable' => 'required|numeric',
+            'earnable_ns' => 'required|numeric',
             'earned_after' => 'required|numeric',
         ];
         $request->validate($rules);

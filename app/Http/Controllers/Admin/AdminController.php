@@ -115,7 +115,9 @@ class AdminController extends Controller
             'subscription' => 'required',
             'min_payout' => 'required',
             'max_videos' => 'required',
+            'max_videos_ns' => 'required',
             'referral_percentage' => 'required',
+            'payout_tax_percentage' => 'required',
         ];
 
         $request->validate($rules);
@@ -123,7 +125,9 @@ class AdminController extends Controller
         Setting::where('slug', 'subscription')->update(['meta' => $request->subscription]);
         Setting::where('slug', 'min_payout')->update(['meta' => $request->min_payout]);
         Setting::where('slug', 'max_videos')->update(['meta' => $request->max_videos]);
+        Setting::where('slug', 'max_videos_ns')->update(['meta' => $request->max_videos_ns]);
         Setting::where('slug', 'referral_percentage')->update(['meta' => $request->referral_percentage]);
+        Setting::where('slug', 'payout_tax_percentage')->update(['meta' => $request->payout_tax_percentage]);
 
         return back()->with('success', 'Site Settings changed successfully!');
     }

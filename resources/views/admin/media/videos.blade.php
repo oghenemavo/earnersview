@@ -38,7 +38,8 @@
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Title</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Category</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Length</span></th>
-                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Earnable</span></th>
+                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Earnable <span class="text-success">(S)</span></span></th>
+                            <th class="nk-tb-col tb-col-md"><span class="sub-text">Earnable <span class="text-danger">(NS)</span></span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Earned After</span></th>
                             <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
                             <th class="nk-tb-col tb-col-lg"><span class="sub-text">Created at</span></th>
@@ -171,7 +172,7 @@
 
                     <div class="form-group">
                         <div class="form-label-group">
-                            <label class="form-label" for="earnable">Earnable</label>
+                            <label class="form-label" for="earnable">Earnable (Subscribers)</label>
                         </div>
                         <div class="form-control-wrap">
                             <div class="input-group">
@@ -187,6 +188,29 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="form-note">Earnable Value for Subscribed Users</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="earnable">Earnable (Non Subscribers)</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">&#8358;</span>
+                                </div>
+                                <input type="number" class="form-control form-control-lg  @error('earnable_ns') is-invalid @enderror"
+                                id="earnable_ns" name="earnable_ns" value="{{ old('earnable_ns') }}" min="1" step="0.01">
+                                
+                                @error('earnable_ns')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-note">Earnable Value for <b>Non</b> Subscribed Users</div>
                         </div>
                     </div>
 
@@ -326,6 +350,7 @@
                     { data : 'category', className : 'nk-tb-col tb-col-md' },
                     { data : 'length', className : 'nk-tb-col tb-col-md' },
                     { data : 'earnable', className : 'nk-tb-col tb-col-md' },
+                    { data : 'earnable_ns', className : 'nk-tb-col tb-col-md' },
                     { data : 'earned_after', className : 'nk-tb-col tb-col-md' },
                     { 
                         data : 'status', className : 'nk-tb-col tb-col-md',
@@ -348,7 +373,7 @@
                 ],
                 columnDefs: [
                     {
-                        targets   : 7,
+                        targets   : 8,
                         className : 'nk-tb-col nk-tb-col-tools',
                         data      : null,
                         render    : function (data, type, full, meta) {
@@ -573,6 +598,9 @@
                         minlength: 20,
                     },
                     earnable: {
+                        required: true,
+                    },
+                    earnable_ns: {
                         required: true,
                     },
                     earned_after: {

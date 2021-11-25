@@ -78,14 +78,14 @@
                                                 </div>
                                             </div>
                                             <div class="gen-movie-action">
-                                                <a href="index.html" class="gen-button">
+                                                <a href="{{ route('video', $video->slug) }}" class="gen-button">
                                                     <i class="fa fa-play"></i>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="gen-info-contain">
                                             <div class="gen-movie-info">
-                                                <h3><a href="index.html">{{ $video->title }}</a></h3>
+                                                <h3><a href="{{ route('video', $video->slug) }}">{{ $video->title }}</a></h3>
                                             </div>
                                             <div class="gen-movie-meta-holder">
                                                 <ul>

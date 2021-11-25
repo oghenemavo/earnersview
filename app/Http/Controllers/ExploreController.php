@@ -59,8 +59,14 @@ class ExploreController extends Controller
         $data['user'] = $user;
         if ($user) {
             $data['subscription'] = is_null(auth()->guard('web')->user()->membership);
-            $data['max_videos'] = Setting::where('slug', 'max_videos')->first()->meta;
+
             $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
+
+            // subscribed users max videos
+            $data['max_videos'] = Setting::where('slug', 'max_videos')->first()->meta;
+
+            // non subscribed users max videos
+            $data['max_videos_ns'] = Setting::where('slug', 'max_videos_ns')->first()->meta;
         }
         return view('video', $data);
     }

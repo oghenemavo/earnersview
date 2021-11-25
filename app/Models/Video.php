@@ -24,6 +24,7 @@ class Video extends Model
         'length',
         'charges',
         'earnable',
+        'earnable_ns',
         'earned_after',
         'status',
     ];

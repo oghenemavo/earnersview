@@ -137,7 +137,6 @@ class UserController extends Controller
             $total_amount = $result->data->amount;
 
             Transaction::where('tx_ref', $tx_ref)->update(['is_confirmed' => '1', 'confirmed_at' => date('Y-m-d H:i:s')]);
-            
 
             // Retrieve flight by name or instantiate with the name, delayed, and arrival_time attributes...
             $membership = Membership::firstOrCreate(
@@ -151,7 +150,7 @@ class UserController extends Controller
                 if ($refer_info) {
                     $bonus_percent = Setting::where('slug', 'referral_percentage')->first()->meta;
 
-                    $refer_info->bonus = $total_amount * $bonus_percent;
+                    $refer_info->bonus = $total_amount * ($bonus_percent * 0.01);
                     $refer_info->status = '1';
                     $refer_info->bonus_at = Carbon::now();
                     $refer_info->save();
@@ -217,8 +216,13 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'video_id' => $video->id,
                 'watched' => $played,
-                'credit' => $video->earnable,
             ];
+
+            if (! is_null(auth()->guard('web')->user()->membership)) {
+                $log['credit'] = $video->earnable;
+            } else {
+                $log['credit'] = $video->earnable_ns;
+            }
             
             $i = VideoLog::firstOrCreate(
                 ['user_id' => $user->id, 'video_id' => $video->id],
