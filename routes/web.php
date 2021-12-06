@@ -32,12 +32,13 @@ Auth::routes(['verify' => true]);
  * User Routes
  */
 Route::name('user.')->group(function () {
+
     Route::middleware(['guest:web', 'prevent_cached_history'])->group(function () {
         Route::get('signup/{referral_id?}', [UserAccess::class, 'signup']);
         Route::post('signup/create', [UserAccess::class, 'create'])->name('create');
     });
 
-    Route::middleware(['auth:web', 'prevent_cached_history', 'verified'])->group(function () {
+    Route::middleware(['auth:web', 'prevent_cached_history'])->group(function () {
         Route::redirect('/home', '/', 301);
         // Route::view('home', 'user.dashboard.index')->name('dashboard');
 
@@ -72,6 +73,10 @@ Route::prefix('admin')->group(function () {
         Route::middleware(['guest:admin', 'prevent_cached_history'])->group(function () {
             Route::get('/login', [AuthController::class, 'login'])->name('login');
             Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+            Route::get('/forgot-password', [AuthController::class, 'forgot'])->name('forgot.password');
+            Route::post('/recover/password', [AuthController::class, 'recover'])->name('recover.password');
+            Route::get('/reset/password/{token}', [AuthController::class, 'resetForgotPassword'])->name('reset.forgot.password');
+            Route::put('/reset/password', [AuthController::class, 'reset'])->name('reset.password');
         });
 
         Route::middleware(['auth:admin', 'prevent_cached_history'])->group(function () {

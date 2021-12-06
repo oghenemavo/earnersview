@@ -36,10 +36,9 @@ class UserAccess extends Controller
         
         $user = User::create($data);
 
-        event(new Registered($user));
-
+        
         Wallet::create(['user_id' => $user->id]);
-
+        
         $referrer = User::where('referral_code', $request->referral)->first();
         if ($referrer) {
             $refer_info = [
@@ -49,7 +48,8 @@ class UserAccess extends Controller
             ];
             Referral::create($refer_info);
         }
-
+        
+        event(new Registered($user));
         auth()->login($user);
         
         return redirect()->to('/');

@@ -11,13 +11,14 @@
             </div>
         </div>
     </div>
-    <form action="html/index.html">
+    <form method="POST" action="{{ route('admin.recover.password') }}">
+        @csrf
         <div class="form-group">
             <div class="form-label-group">
-                <label class="form-label" for="default-01">Email</label>
+                <label class="form-label" for="email">Email</label>
             </div>
             <div class="form-control-wrap">
-                <input type="email" class="form-control form-control-lg" id="default-01" placeholder="Enter your email address">
+                <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Enter your email address">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

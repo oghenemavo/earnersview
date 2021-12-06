@@ -11,7 +11,10 @@
             </div>
         </div>
     </div>
-    <form action="html/index.html">
+    <form method="POST" action="{{ route('admin.reset.password') }}">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="email" value="{{ $email }}">
         <div class="form-group">
             <div class="form-label-group">
                 <label class="form-label" for="password">Password</label>
@@ -21,8 +24,13 @@
                     <em class="passcode-icon icon-show icon ni ni-eye"></em>
                     <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                 </a>
-                <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password">
+                <input type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" id="password" name="password" placeholder="Enter your password">
             </div>
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
         <div class="form-group">
@@ -34,8 +42,13 @@
                     <em class="passcode-icon icon-show icon ni ni-eye"></em>
                     <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                 </a>
-                <input type="password" class="form-control form-control-lg" id="repeat_password" name="repeat_password" placeholder="Repeat your password">
+                <input type="password" class="form-control form-control-lg @error('repeat_password') is-invalid @enderror" id="repeat_password" name="repeat_password" placeholder="Repeat your password">
             </div>
+            @error('repeat_password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         <div class="form-group">
             <button class="btn btn-lg btn-primary btn-block">Reset Password</button>
