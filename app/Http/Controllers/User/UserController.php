@@ -227,11 +227,11 @@ class UserController extends Controller
             $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00';
 
             if (! is_null(auth()->guard('web')->user()->membership)) {
-                $log['credit'] = $video->earnable * $tax;
+                $log['credit'] = $video->earnable * (0.01 * $tax);
                 $log['tax'] = $tax;
                 $log['amount'] = $video->earnable;
             } else {
-                $log['credit'] = $video->earnable_ns;
+                $log['credit'] = $video->earnable_ns * (0.01 * $tax);
             }
             
             $i = VideoLog::firstOrCreate(

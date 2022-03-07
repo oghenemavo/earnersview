@@ -28,7 +28,7 @@
         <!--=========== Loader =============-->
         <div id="gen-loading">
             <div id="gen-loading-center">
-                <img src="{{ asset('app/images/logo-1.png') }}" alt="loading">
+                <img src="{{ asset('images/earners-logo.png') }}" alt="loading">
             </div>
         </div>
         <!--=========== Loader =============-->
@@ -41,7 +41,7 @@
                         <div class="col-lg-12">
                             <nav class="navbar navbar-expand-lg navbar-light">
                                 <a class="navbar-brand" href="#">
-                                    <img class="img-fluid logo" src="{{ asset('app/images/logo-1.png') }}" alt="streamlab-image">
+                                    <img class="img-fluid logo" src="{{ asset('images/earners-logo.png') }}" alt="streamlab-image">
                                 </a>
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <div id="gen-menu-contain" class="gen-menu-contain">
@@ -67,8 +67,46 @@
                                                 <a href="{{ url('faq') }}">FAQs</a>
                                             </li>
                                             <li class="menu-item">
-                                                <a href="{{ url('contact') }}">Contact</a>
+                                                <a href="{{ url('contact') }}">Contacts</a>
                                             </li>
+                                            @guest
+                                            <li>
+                                                <a href="{{ url('login') }}">Log in</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ url('register') }}">Sign up</a>
+                                            </li>
+                                            @endguest
+
+                                            <div class="d-block d-sm-none">
+                                                @auth
+                                                    <li>
+                                                        <a href="{{ route('user.profile') }}">Profile</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('user.report.earnings') }}">Earnings</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('user.report.referrals') }}">Referrals</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('user.report.transactions') }}">Transactions History</a>
+                                                    </li>
+                                                    <!-- Library Menu -->
+                                                    <li>
+                                                        <a href="{{ route('user.settings') }}">Settings</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
+                                                            Log out 
+                                                        </a>
+                                                    </li>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                @endauth
+                                            </div>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -78,8 +116,8 @@
                                         <div class="gen-search-form">
                                             <form role="search" method="get" class="search-form" action="#">
                                                 <label>
-                                                <span class="screen-reader-text"></span>
-                                                <input type="search" class="search-field" placeholder="Search …" value="" name="s">
+                                                    <span class="screen-reader-text"></span>
+                                                    <input type="search" class="search-field" placeholder="Search …" value="" name="s">
                                                 </label>
                                                 <button type="submit" class="search-submit"><span
                                                     class="screen-reader-text"></span></button>
@@ -134,8 +172,8 @@
                                 <div class="widget">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <img src="images/asset-0.png" class="gen-footer-logo" alt="gen-footer-logo">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            <img src="{{ asset('images/earners-logo.png') }}" class="gen-footer-logo" alt="gen-footer-logo">
+                                            <p>Watch to Earn.
                                             </p>
                                             <ul class="social-link">
                                                 <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
@@ -167,13 +205,13 @@
                                     <h4 class="footer-title">Company</h4>
                                     <div class="menu-about-container">
                                         <ul class="menu">
-                                            <li class="menu-item"><a href="contact-us.html">Company</a>
+                                            <li class="menu-item"><a href="/faq">Faq</a></li>
+                                            <!-- <li class="menu-item"><a href="contact-us.html">Company</a> -->
                                             </li>
-                                            <li class="menu-item"><a href="contact-us.html">Faq</a></li>
-                                            <li class="menu-item"><a href="contact-us.html">Contact us</a></li>
-                                            <li class="menu-item"><a href="contact-us.html">Privacy Policy</a></li>
-                                            <li class="menu-item"><a href="contact-us.html">Terms Of Use</a></li>
-                                            <li class="menu-item"><a href="contact-us.html">Help Center</a></li>
+                                            <li class="menu-item"><a href="/contact">Contact us</a></li>
+                                            <li class="menu-item"><a href="#">Privacy Policy</a></li>
+                                            <li class="menu-item"><a href="#">Terms Of Use</a></li>
+                                            <li class="menu-item"><a href="#">Help Center</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -183,14 +221,14 @@
                                     <h4 class="footer-title">Get Started</h4>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            <p>Watch to Earn.
                                             </p>
                                             <a href="#">
-                                                <img src="{{ asset('app/images/asset-35.png') }}" class="gen-playstore-logo" alt="playstore">
+                                                <img src="{{ asset('images/earners-logo.png') }}" class="gen-playstore-logo" alt="playstore">
                                             </a>
-                                            <a href="#">
+                                            <!-- <a href="#">
                                                 <img src="{{ asset('app/images/asset-36.png') }}" class="gen-appstore-logo" alt="appstore">
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </div>
                                 </div>

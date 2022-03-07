@@ -13,7 +13,7 @@
                         @csrf
                         <h4>{{ __('Register') }}</h4>
 
-                        <input type="hidden" name="referral" value="{{ $referral }}">
+                        <input type="hidden" name="referral" value="{{ $referral ?? null }}">
 
                         <div class="row">
                             <div class="col">

@@ -15,9 +15,18 @@ class ExploreController extends Controller
     public function index()
     {
         $data['page_title'] = 'Home - Earner\'s View';
-        $data['slider'] = Video::where('status', '1')->orderBy('created_at', 'desc')->limit(4)->get();
+        $data['slider'] = Video::where('status', '1')->orderBy('created_at', 'desc')->limit(5)->get();
         $data['feed'] = Video::where('status', '1')->get();
         $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['duration'] = function($seconds) {
+            if ($seconds > 60) {
+                return floor($seconds/60);
+            }
+            return 1;
+        };
+        $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) {
+            return auth()->check() ? $earnings['earnable'] : $earnings['earnable_ns'];
+        };
         return view('welcome', $data);
     }
     
@@ -51,13 +60,15 @@ class ExploreController extends Controller
     public function video(Video $video)
     {
         $data['page_title'] = $video->title;
-        $data['video'] = $video;
+        $data['video'] = $video ?? 0;
+        $data['views'] = VideoLog::where('video_id', $video->id)->count();
         $data['latest_videos'] = Video::where('category_id', $video->category_id)
         ->where('status', '1')->orderby('created_at', 'desc')->limit('10')->get();
         
         $user = auth()->guard('web')->user();
         $data['user'] = $user;
         if ($user) {
+            $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00');
             $data['subscription'] = is_null(auth()->guard('web')->user()->membership);
 
             $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
@@ -68,6 +79,15 @@ class ExploreController extends Controller
             // non subscribed users max videos
             $data['max_videos_ns'] = Setting::where('slug', 'max_videos_ns')->first()->meta;
         }
+        $data['duration'] = function($seconds) {
+            if ($seconds > 60) {
+                return floor($seconds/60);
+            }
+            return 1;
+        };
+        $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) {
+            return auth()->check() ? $earnings['earnable'] : $earnings['earnable_ns'];
+        };
         return view('video', $data);
     }
 }

@@ -36,7 +36,7 @@
                 <div class="col-lg-9 col-md-12">
                     <div class="gen-blog-post">
                         <div class="gen-post-media">
-                            <img src="images/background/asset-19.jpeg" alt="blog-image" loading="lazy">
+                            <!-- <img src="{{ asset('images/background/asset-19.jpeg') }}" alt="blog-image" loading="lazy"> -->
                         </div>
                         <div class="gen-blog-contain">
                             <div class="gen-post-meta">
