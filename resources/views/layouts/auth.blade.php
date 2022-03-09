@@ -24,7 +24,7 @@
         <!--=========== Loader =============-->
         <div id="gen-loading">
             <div id="gen-loading-center">
-                <img src="{{ asset('app/images/logo-1.png') }}" alt="loading">
+                <img src="{{ asset('images/earners-logo.png') }}" alt="loading">
             </div>
         </div>
         <!--=========== Loader =============-->

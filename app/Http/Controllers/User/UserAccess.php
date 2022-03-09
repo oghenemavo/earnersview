@@ -52,7 +52,7 @@ class UserAccess extends Controller
         event(new Registered($user));
         auth()->login($user);
         
-        return redirect()->to('/');
+        return redirect()->to('/')->with('success', 'Account created successfully');
     }
 
 }

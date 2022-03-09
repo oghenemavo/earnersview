@@ -71,6 +71,9 @@ Route::name('user.')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::name('admin.')->group(function () {
         Route::middleware(['guest:admin', 'prevent_cached_history'])->group(function () {
+            Route::get('/', function() {
+                return redirect()->action([AuthController::class, 'login']);
+            });
             Route::get('/login', [AuthController::class, 'login'])->name('login');
             Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
             Route::get('/forgot-password', [AuthController::class, 'forgot'])->name('forgot.password');

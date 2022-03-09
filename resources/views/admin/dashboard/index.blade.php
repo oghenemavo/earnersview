@@ -17,22 +17,22 @@
         <div class="row g-gs">
             <div class="col-sm-4 col-xxl-12">
                 <div class="nk-order-ovwg-data buy">
-                    <div class="amount">12,954.63 <small class="currenct currency-usd">USD</small></div>
-                    <div class="info">Last month <strong>39,485 <span class="currenct currency-usd">USD</span></strong></div>
+                    <div class="amount">{{ $total_videos }} <small class="currenct currency-usd">Videos</small></div>
+                    <!-- <div class="info">Last month <strong>39,485 <span class="currenct currency-usd">USD</span></strong></div> -->
                     <div class="title"><em class="icon ni ni-arrow-down-left"></em> Total Videos</div>
                 </div>
             </div>
             <div class="col-sm-4 col-xxl-12">
                 <div class="nk-order-ovwg-data sell">
-                    <div class="amount">12,954.63 <small class="currenct currency-usd">USD</small></div>
-                    <div class="info">Last month <strong>39,485 <span class="currenct currency-usd">USD</span></strong></div>
+                    <div class="amount">{{ $total_users }} <small class="currenct currency-usd">User(s)</small></div>
+                    <!-- <div class="info">Last month <strong>{{ $total_users }} <span class="currenct currency-usd">USD</span></strong></div> -->
                     <div class="title"><em class="icon ni ni-arrow-up-left"></em> Total Users</div>
                 </div>
             </div>
             <div class="col-sm-4 col-xxl-12">
                 <div class="nk-order-ovwg-data sell">
-                    <div class="amount">12,954.63 <small class="currenct currency-usd">USD</small></div>
-                    <div class="info">Last month <strong>39,485 <span class="currenct currency-usd">USD</span></strong></div>
+                    <div class="amount">{{ $active_videos }} <small class="currenct currency-usd">Active</small></div>
+                    <!-- <div class="info">Last month <strong>39,485 <span class="currenct currency-usd">USD</span></strong></div> -->
                     <div class="title"><em class="icon ni ni-arrow-up-left"></em> Active Videos</div>
                 </div>
             </div>

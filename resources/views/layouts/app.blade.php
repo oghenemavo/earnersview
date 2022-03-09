@@ -158,10 +158,19 @@
         </header>
         <!--========== Header ==============-->
 
+        
         <!--========== Main Content ==============-->
         @yield('content')
         <!--========== Main Content ==============-->
-
+        
+        <!-- notifications alert -->
+        @foreach(['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'gray', 'light'] as $alert)
+            @if(session()->has($alert))
+                <x-alert type="{{ $alert }}" :message="session()->get($alert)"/>
+            @endif
+        @endforeach
+        <!-- notifications alert -->
+        
         <!-- footer start -->
         <footer id="gen-footer">
             <div class="gen-footer-style-1">

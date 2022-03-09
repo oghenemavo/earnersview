@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use App\Models\User;
+use App\Models\{User, Video};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -14,6 +14,9 @@ class AdminController extends Controller
     public function index()
     {
         $data['page_title'] = 'Admin dashboard';
+        $data['total_users'] = User::get()->count();
+        $data['total_videos'] = Video::get()->count() ?? 0;
+        $data['active_videos'] = Video::where('status', '1')->get()->count() ?? 0;
         return view('admin.dashboard.index', $data);
     }
     
