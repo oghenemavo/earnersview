@@ -62,7 +62,7 @@
             <div class="modal-body modal-body-lg">
                 <h5 class="title">Add a Video</h5>
                 
-                <form id="create_video" action="{{ route('admin.media.create.video') }}" method="post" enctype="multipart/form-data">
+                <form id="create_video" action="{{ route('admin.media.create.video') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="form-label-group">

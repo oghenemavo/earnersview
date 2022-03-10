@@ -102,7 +102,7 @@ Route::prefix('admin')->group(function () {
 
                 // videos
                 Route::get('videos', [MediaController::class, 'videos'])->name('videos');
-                Route::post('create/video', [MediaController::class, 'createVideo'])->name('create.video');
+                Route::post('post/video', [MediaController::class, 'createVideo'])->name('create.video');
                 Route::get('edit/video/{video?}', [MediaController::class, 'editVideo'])->name('edit.video');
                 Route::put('update/video/{video}', [MediaController::class, 'updateVideo'])->name('update.video');
                 Route::put('block/video', [MediaController::class, 'blockVideo'])->name('block.video');

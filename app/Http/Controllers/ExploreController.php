@@ -18,6 +18,7 @@ class ExploreController extends Controller
         $data['slider'] = Video::where('status', '1')->orderBy('created_at', 'desc')->limit(5)->get();
         $data['feed'] = Video::where('status', '1')->get();
         $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['current_time'] = Carbon::now();
         $data['duration'] = function($seconds) {
             if ($seconds > 60) {
                 return floor($seconds/60);
