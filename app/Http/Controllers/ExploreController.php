@@ -69,7 +69,7 @@ class ExploreController extends Controller
         $user = auth()->guard('web')->user();
         $data['user'] = $user;
         if ($user) {
-            $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00');
+            $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.1');
             $data['subscription'] = is_null(auth()->guard('web')->user()->membership);
 
             $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
@@ -90,12 +90,12 @@ class ExploreController extends Controller
             // return auth()->check() ?  : $earnings['earnable_ns'];
             if (auth()->check()) {
                 if (!$data['subscription']) {
-                    return $earnings['earnable'];
+                    return $earnings['earnable'] - ($earnings['earnable'] * $data['tax']);
                 } else {
-                    return $earnings['earnable_ns'];
+                    return $earnings['earnable_ns'] - ($earnings['earnable_ns'] * $data['tax']);
                 }
             }
-            return $earnings['earnable'];
+            return $earnings['earnable'] - ($earnings['earnable'] * $data['tax']);
         };
         return view('video', $data);
     }

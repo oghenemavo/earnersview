@@ -188,7 +188,7 @@
                                             Swal.fire({
                                                 position: 'top-end',
                                                 icon: 'success',
-                                                title: `Your wallet has been credited with &#8358;{{ (!$subscription ? $video->earnable - ($video->earnable * $tax) : $video->earnable - ($video->earnable_ns * $tax) ) }}`,
+                                                title: `Your wallet has been credited with &#8358;{{ $earning(['earnable' => $video->earnable, 'earnable_ns' => $video->earnable_ns]) }}`,
                                                 showConfirmButton: false,
                                                 timer: 3500,
                                             })
