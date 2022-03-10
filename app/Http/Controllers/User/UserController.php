@@ -224,14 +224,14 @@ class UserController extends Controller
                 'watched' => $played,
             ];
 
-            $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00';
+            $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.01';
 
             if (! is_null(auth()->guard('web')->user()->membership)) {
-                $log['credit'] = $video->earnable * (0.01 * $tax);
+                $log['credit'] = $video->earnable - ($video->earnable * ($tax/100));
                 $log['tax'] = $tax;
                 $log['amount'] = $video->earnable;
             } else {
-                $log['credit'] = $video->earnable_ns * (0.01 * $tax);
+                $log['credit'] = $video->earnable - ($video->earnable_ns * ($tax/100));
             }
             
             $i = VideoLog::firstOrCreate(

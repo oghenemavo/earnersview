@@ -71,6 +71,7 @@ class VerifyPayout extends Command
                     if ($user_wallet) {
                         $user_wallet->ledeger_balance -= $data->amount;
                         $user_wallet->balance += $data->amount;
+                        $user_wallet->save();
                     }
                 }
             }

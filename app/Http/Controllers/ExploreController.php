@@ -86,8 +86,16 @@ class ExploreController extends Controller
             }
             return 1;
         };
-        $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) {
-            return auth()->check() ? $earnings['earnable'] : $earnings['earnable_ns'];
+        $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) use($data) {
+            // return auth()->check() ?  : $earnings['earnable_ns'];
+            if (auth()->check()) {
+                if (!$data['subscription']) {
+                    return $earnings['earnable'];
+                } else {
+                    return $earnings['earnable_ns'];
+                }
+            }
+            return $earnings['earnable'];
         };
         return view('video', $data);
     }
