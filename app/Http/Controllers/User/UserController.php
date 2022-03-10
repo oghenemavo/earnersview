@@ -231,7 +231,8 @@ class UserController extends Controller
                 $log['tax'] = $tax;
                 $log['amount'] = $video->earnable;
             } else {
-                $log['credit'] = $video->earnable - ($video->earnable_ns * ($tax/100));
+                $log['credit'] = $video->earnable_ns - ($video->earnable_ns * ($tax/100));
+                $log['amount'] = $video->earnable_ns;
             }
             
             $i = VideoLog::firstOrCreate(
