@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ProcessTransfer::class,
         Commands\VerifyPayout::class,
+        Commands\CreditWallet::class,
     ];
 
     /**
@@ -25,8 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('process:transfer')->everyFiveMinutes();
-        $schedule->command('verify:payout')->everyFiveMinutes();
+        $schedule->command('process:transfer')->everyMinute();
+        $schedule->command('verify:payout')->everyMinute();
+        $schedule->command('credit:wallet')->everyMinute();
     }
 
     /**

@@ -68,8 +68,8 @@ class ExploreController extends Controller
         
         $user = auth()->guard('web')->user();
         $data['user'] = $user;
+        $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.1');
         if ($user) {
-            $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.1');
             $data['subscription'] = is_null(auth()->guard('web')->user()->membership);
 
             $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
