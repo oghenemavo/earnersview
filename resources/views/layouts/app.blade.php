@@ -70,10 +70,10 @@
                                                 <a href="{{ url('contact') }}">Contacts</a>
                                             </li>
                                             @guest
-                                            <li>
+                                            <li class="d-lg-none">
                                                 <a href="{{ url('login') }}">Log in</a>
                                             </li>
-                                            <li>
+                                            <li class="d-lg-none">
                                                 <a href="{{ url('register') }}">Sign up</a>
                                             </li>
                                             @endguest
