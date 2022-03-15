@@ -22,7 +22,7 @@ class CreateVideosTable extends Migration
             $table->text('url');
             $table->text('cover');
             $table->string('length');
-            $table->decimal('charges', 11, 2, true)->default('0.00');
+            $table->decimal('charges', 17, 2, true)->default('0.00');
             $table->decimal('earnable', 11, 2, true)->default('0.00');
             $table->decimal('earnable_ns', 11, 2, true)->default('0.0');
             $table->string('earned_after');

@@ -159,7 +159,7 @@
                                     <span class="input-group-text" id="basic-addon3">&#8358;</span>
                                 </div>
                                 <input type="number" class="form-control form-control-lg  @error('charges') is-invalid @enderror"
-                                id="charges" name="charges" value="{{ old('charges') }}" min="1" step="0.01">
+                                id="charges" name="charges" value="{{ old('charges') }}" min="100" step="0.01" max="1000000000">
                             
                                 @error('charges')
                                     <span class="invalid-feedback" role="alert">
@@ -596,6 +596,11 @@
                     description: {
                         required: true,
                         minlength: 20,
+                    },
+                    charges: {
+                        required: true,
+                        min: 100,
+                        max: 1000000000,
                     },
                     earnable: {
                         required: true,

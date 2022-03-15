@@ -69,7 +69,7 @@
 <script>
     $(document).ready(function() {
         $('#payout').click(function () { 
-            if ($(this).attr('data-balance') > $(this).attr('data-min')) {
+            if ($(this).attr('data-balance') >= $(this).attr('data-min')) {
                 $.post("{{ route('user.request.payout') }}",
                     {
                         "_token": `{{ csrf_token() }}`,

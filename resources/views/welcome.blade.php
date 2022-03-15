@@ -140,7 +140,7 @@
                                                 </div>
                                                 <div class="gen-movie-meta-holder">
                                                     <ul>
-                                                        <li>1hr 24 mins</li>
+                                                        <li>{{ $duration($video->length) }} mins</li>
                                                         <li>
                                                             <a href="action.html"><span>{{ $video->category->category }}</span></a>
                                                         </li>

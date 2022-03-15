@@ -69,9 +69,9 @@ class MediaController extends Controller
             'video_id' => 'required|size:11',
             'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'length' => 'required|numeric',
-            'charges' => 'required|numeric',
-            'earnable' => 'required|numeric',
-            'earnable_ns' => 'required|numeric',
+            'charges' => 'required|numeric|min:100|max:1000000000',
+            'earnable' => 'required|numeric|min:1',
+            'earnable_ns' => 'required|numeric|min:1',
             'earned_after' => 'required|numeric',
         ];
         $request->validate($rules);
