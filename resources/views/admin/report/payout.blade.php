@@ -7,9 +7,9 @@
         <div class="nk-block-head">
             <div class="nk-block-between-md g-4">
                 <div class="nk-block-head-content">
-                    <h4 class="nk-block-title">Referral info & report</h4>
+                    <h4 class="nk-block-title">Payout info & report</h4>
                     <div class="nk-block-des">
-                        <p>Referral, Bonus and Period reports.</p>
+                        <p>Payout, status and reports.</p>
                     </div>
                 </div>
             </div>
