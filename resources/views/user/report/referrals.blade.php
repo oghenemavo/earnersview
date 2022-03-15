@@ -35,6 +35,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
                 <h5>Referral ID: {{ auth()->guard('web')->user()->referral_code }}</h5>
+                <p class="text-primary">Referral Link: {{ url('signup/'. auth()->guard('web')->user()->referral_code) }}</p>
                 <table id="referrals_table" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
