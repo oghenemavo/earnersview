@@ -176,7 +176,7 @@ class MediaController extends Controller
         $string = trim($string);
         $string = stripslashes($string);
         $string = htmlspecialchars($string, ENT_QUOTES);
-        $string = filter_var($string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+        $string = filter_var($string, FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_STRIP_HIGH);
         return $string;
     }
 }
