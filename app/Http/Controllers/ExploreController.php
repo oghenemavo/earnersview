@@ -21,9 +21,9 @@ class ExploreController extends Controller
         $data['current_time'] = Carbon::now();
         $data['duration'] = function($seconds) {
             if ($seconds > 60) {
-                return floor($seconds/60);
+                return floor($seconds);
             }
-            return 1;
+            return floor($seconds);
         };
         $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) {
             return auth()->check() ? $earnings['earnable'] : $earnings['earnable_ns'];
