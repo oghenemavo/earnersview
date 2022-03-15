@@ -25,8 +25,19 @@ class ExploreController extends Controller
             }
             return floor($seconds);
         };
-        $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) {
-            return auth()->check() ? $earnings['earnable'] : $earnings['earnable_ns'];
+        $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.1');
+        // $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) {
+        //     return auth()->check() ? $earnings['earnable'] : $earnings['earnable_ns'];
+        // };
+        $data['earning'] = function($earnings = ['earnable' => 0, 'earnable_ns' => 0]) use($data) {
+            if (auth()->check()) {
+                if (!is_null(auth()->guard('web')->user()->membership)) {
+                    return $earnings['earnable'] - ($earnings['earnable'] * $data['tax']);
+                } else {
+                    return $earnings['earnable_ns'] - ($earnings['earnable_ns'] * $data['tax']);
+                }
+            }
+            return $earnings['earnable'] - ($earnings['earnable'] * $data['tax']);
         };
         return view('welcome', $data);
     }
