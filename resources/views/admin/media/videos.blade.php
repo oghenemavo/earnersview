@@ -138,14 +138,14 @@
                             <label class="form-label" for="description">Video Description</label>
                         </div>
                         <div class="form-control-wrap">
-                            <textarea class="tinymce-toolbar form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
-                            
+                            <textarea class="form-control form-control-lg  @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                           
+                           
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <div data-error="description" class="error"></div>
                         </div>
                     </div>
 
