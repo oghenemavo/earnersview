@@ -78,7 +78,7 @@ class User extends Authenticatable
     public function getInitialsAttribute()
     {
         $split = explode(' ', $this->attributes['name']);
-        return isset($split[1][0]) 
+        return isset($split[1]) 
             ? strtoupper($split[0][0]) . strtoupper($split[1][0])
             : strtoupper($split[0][0]) . strtoupper($split[0][1]);
     }
