@@ -163,7 +163,7 @@
 
 
     <!-- Category-Videos Start -->
-    <section class="gen-section-padding-3">
+    <section style="padding: 0;">
         <div class="container">
             <div class="row">
                 
