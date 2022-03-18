@@ -38,6 +38,7 @@
                     <thead>
                         <tr>
                             <th>Transaction Id</th>
+                            <th>Transaction Type</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Transaction date</th>
@@ -79,8 +80,21 @@
                 ],
                 columns: [
                     { data: 'reference', className: 'nk-tb-col tb-col-md' },
+                    { data: 'type', className: 'nk-tb-col tb-col-md' },
                     { data : 'amount', className : 'nk-tb-col tb-col-md' },
-                    { data : 'status', className : 'nk-tb-col tb-col-md', render: (data) => `<span class="badge badge-success">success</span>` },
+                    { data : 'status', className : 'nk-tb-col tb-col-md', 
+                        render: (data) => {
+                            if (data.toLowerCase() == 'pending') {
+                                return `<span class="badge badge-warning">pending</span>`;
+                            } else if (data.toLowerCase() == 'success') {
+                                return `<span class="badge badge-success">success</span>`;
+                            } else if (data.toLowerCase() == 'failed') {
+                                return `<span class="badge badge-danger">failed</span>`;
+                            } else {
+                                return `<span class="badge badge-info">${data}</span>`;
+                            } 
+                        } 
+                    },
                     { 
                         data        : 'created_at', className   : 'nk-tb-col tb-col-lg',
                         render      : function (data) {

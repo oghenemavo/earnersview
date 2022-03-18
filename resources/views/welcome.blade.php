@@ -162,6 +162,100 @@
     <!-- owl-carousel Videos Section-1 End -->
 
 
+    <!-- Category-Videos Start -->
+    <section class="gen-section-padding-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        @foreach($category_videos as $key => $categories)
+                            @foreach($categories as $cat_video)
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="gen-carousel-movies-style-1 movie-grid style-1">
+                                        <div class="gen-movie-contain">
+                                            <div class="gen-movie-img">
+                                                <img src="{{ $cat_video->cover_path }}" alt="{{ $cat_video->slug }}">
+                                                <div class="gen-movie-add">
+                                                    <div class="wpulike wpulike-heart ">
+                                                        <div class="wp_ulike_general_class">
+                                                            <a href="#" class="sl-button"><i class="far fa-heart"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <ul class="menu bottomRight">
+                                                        <li class="share top">
+                                                            <i class="fa fa-share-alt"></i>
+                                                            <ul class="submenu">
+                                                                <li><a href="#" class="facebook"><i
+                                                                            class="fab fa-facebook-f"></i></a>
+                                                                </li>
+                                                                <li><a href="#" class="facebook"><i
+                                                                            class="fab fa-instagram"></i></a>
+                                                                </li>
+                                                                <li><a href="#" class="facebook"><i
+                                                                            class="fab fa-twitter"></i></a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul> -->
+                                                    <!-- <div class="movie-actions--link_add-to-playlist dropdown">
+                                                        <a class="dropdown-toggle" href="#"><i class="fa fa-plus"></i></a>
+                                                        <div class="dropdown-menu mCustomScrollbar">
+                                                            <div class="mCustomScrollBox">
+                                                                <div class="mCSB_container">
+                                                                    <a class="login-link" href="#">Sign
+                                                                        in to add this movie to a playlist.</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="gen-movie-action">
+                                                    <a href="single-movie.html" class="gen-button">
+                                                        <i class="fa fa-play"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="gen-info-contain">
+                                                <div class="gen-movie-info">
+                                                    <h3>
+                                                        <a href="single-movie.html">{{ $cat_video->title }}</a>
+                                                    </h3>
+                                                </div>
+                                                <div class="gen-movie-meta-holder">
+                                                    <ul>
+                                                        <li>{{ $duration($cat_video->length) }} secs</li>
+                                                        <li>
+                                                            <a href="action.html"><span>{{ $cat_video->category->category }}</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            <!-- Pagination -->
+                            <div class="col-lg-12 col-md-12 mb-3">
+                                <div class="gen-pagination">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="page-numbers">
+                                            <li><a class="next page-numbers" href="{{ $category_videos[$key][0]->category->slug }}">More {{ $category_videos[$key][0]->category->category }} Video</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <!-- Pagination -->
+
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Category-Videos End -->
+
+
     <!-- owl-carousel images Start -->
     <section class="pt-0 pb-0 mb-4 gen-section-padding-2 home-singal-silder">
         <div class="container">
@@ -228,3 +322,30 @@
     <!-- owl-carousel images End -->
 
 @endsection
+
+@push('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let sub_user, unsub_user;
+        sub_user = `{{ session()->get('sub_user') }}`;
+        unsub_user = `{{ session()->get('unsub_user') }}`;
+
+        if (sub_user != '') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                title: sub_user,
+                showConfirmButton: false,
+                timer: 7500,
+            })
+        } else if (unsub_user != '') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: unsub_user,
+                showConfirmButton: false,
+                timer: 7500,
+            })
+        }
+    </script>
+@endpush

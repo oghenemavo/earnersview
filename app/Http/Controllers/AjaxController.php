@@ -186,17 +186,30 @@ class AjaxController extends Controller
     public function userTransactions(User $user)
     {
         $transaction_collection = $user->transactions()->where('is_confirmed','1')->get();
+        $payout_collection = $user->payouts()->get();
+        $mapped_payouts = $payout_collection->map(function($item, $key) {
+            $data['id'] = $item->id;
+            $data['type'] = 'Payout';
+            $data['amount'] = $item->amount;
+            $data['reference'] = $item->reference;
+            $data['status'] = $item->status;
+            $data['confirmed_at'] = $item->updated_at;
+            $data['created_at'] = $item->created_at;
+
+            return $data;
+        });
         $mapped_transactions = $transaction_collection->map(function($item, $key) {
             $data['id'] = $item->id;
+            $data['type'] = 'Subscription';
             $data['amount'] = $item->amount;
             $data['reference'] = $item->tx_ref;
-            $data['status'] = $item->is_confirmed;
+            $data['status'] = 'successful';
             $data['confirmed_at'] = $item->confirmed_at;
             $data['created_at'] = $item->created_at;
 
             return $data;
         });
-        return response()->json(['transactions' => $mapped_transactions]);
+        return response()->json(['transactions' => [...$mapped_transactions, ...$mapped_payouts]]);
     }
 
     public function allVideoLogs()

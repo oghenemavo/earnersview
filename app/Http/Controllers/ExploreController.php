@@ -39,6 +39,11 @@ class ExploreController extends Controller
             }
             return $earnings['earnable'] - ($earnings['earnable'] * $data['tax']);
         };
+        $data['category_videos'] = Video::where('status', '1')->get()->groupBy('category_id')
+            ->map(function($category) {
+                return $category->take(10);
+            });
+
         return view('welcome', $data);
     }
     
@@ -81,7 +86,7 @@ class ExploreController extends Controller
         $data['user'] = $user;
         $data['tax'] = 0.01 * (Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.1');
         if ($user) {
-            $data['subscription'] = is_null(auth()->guard('web')->user()->membership);
+            $data['subscription'] = is_null($user->membership);
 
             $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
 
@@ -90,6 +95,14 @@ class ExploreController extends Controller
 
             // non subscribed users max videos
             $data['max_videos_ns'] = Setting::where('slug', 'max_videos_ns')->first()->meta;
+
+            // echo '<pre>' . var_export('yes' , true) . '</pre>';
+            
+            if (!$data['subscription'] && ($data['watched_count'] >= $data['max_videos'])) { // subscription exists
+                return redirect()->back()->with('sub_user', 'Maximum numbers of videos watched Today');
+            } elseif ($data['subscription'] && ($data['watched_count'] >= $data['max_videos_ns'])) {
+                return redirect()->back()->with('info', 'Maximum numbers of videos watched Today, Subscribe now to watch more');
+            }
         }
         $data['duration'] = function($seconds) {
             if ($seconds > 60) {
