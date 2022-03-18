@@ -100,6 +100,7 @@ class AjaxController extends Controller
             $data['id'] = $item->id;
             $data['title'] = $item->title;
             $data['material'] = asset("promotions/$item->material");
+            $data['filename'] = $item->material;
             $data['status'] = $item->status;
             $data['created_at'] = $item->created_at;
 

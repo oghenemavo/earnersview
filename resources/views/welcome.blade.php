@@ -276,7 +276,14 @@
                             data-autoplay="true" data-loop="true" data-margin="30">
 
                             @foreach($promotions as $promo)
-                            <div class="item" style="background: url('{{ $promo->material_path }}')">
+                                @if ($filetype($promo->material))
+                                    <div class="item" style="background: url('{{ $promo->material_path }}')">
+                                @else
+                                    <div class="item">
+                                        <video class="mat-video" style="height:100vh;width:100vw;object-fit:cover;position:fixed;left:0;right:0;top:0;bottom:0;z-index:-1;" controls>
+                                            <source src="{{ $promo->material_path }}" type="video/mp4">
+                                        </video>
+                                @endif
                                 <div class="gen-movie-contain h-100">
                                     <div class="container h-100">
                                         <div class="row align-items-center h-100">
@@ -331,6 +338,8 @@
 @push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+
+
         let sub_user, unsub_user;
         sub_user = `{{ session()->get('sub_user') }}`;
         unsub_user = `{{ session()->get('unsub_user') }}`;

@@ -142,14 +142,16 @@
                     className: 'nk-tb-col tb-col-md'
                 },
                 {
-                    data: 'material',
+                    data: 'filename',
                     className: 'nk-tb-col tb-col-md',
                     render: function(data, type, full) {
-                        return `
-                            <span class="user-avatar md">
-                                <img src="${data}" alt="${full.title}">
-                            </span>
-                        `;
+                        let imageExt = ['jpeg','png','jpg','gif','svg',];
+                        let material = data.split('.').pop().toLowerCase();
+                        if (imageExt.includes(material)) {
+                            return '<span class="badge badge-primary">Image</span>';
+                        } else {
+                            return '<span class="badge badge-warning">Video</span>';
+                        }
                     }
                 },
                 {
@@ -364,13 +366,13 @@
                 },
                 material: {
                     required: true,
-                    accept: "image/*",
+                    accept: "image/*,video/*",
                     filesize: 10,
                 },
             },
             messages: {
                 material: {
-                    accept: 'Only Images file formats are accepted',
+                    accept: 'Only Image & Video file formats are accepted',
                 }
             },
         });

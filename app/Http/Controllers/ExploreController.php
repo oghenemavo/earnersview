@@ -43,6 +43,11 @@ class ExploreController extends Controller
             ->map(function($category) {
                 return $category->take(10);
             });
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
 
         return view('welcome', $data);
     }

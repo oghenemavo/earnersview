@@ -18,7 +18,7 @@ class PromotionController extends Controller
     {
         $rules = [
             'title' => 'required|min:2',
-            'material' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'material' => 'required|mimes:jpeg,png,jpg,gif,svg,mp4',
         ];
         $request->validate($rules);
 
