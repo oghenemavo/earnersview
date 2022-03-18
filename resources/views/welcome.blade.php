@@ -27,7 +27,7 @@
                                                             </li>
                                                             <li>{{ $earning(['earnable' => $video->earnable, 'earnable_ns' => $video->earnable_ns]) }}</li>
                                                             <li> <img src="{{ $video->cover_path }}" alt="streamlab-image">
-                                                                <span>{{ $duration($video->length) }} mins</span>
+                                                                <span>{{ $duration($video->length) }} secs</span>
                                                             </li>
                                                             <li>
                                                                 {{ $video->created_at->diffForHumans() }}
@@ -166,22 +166,27 @@
     <section class="gen-section-padding-3">
         <div class="container">
             <div class="row">
+                
                 <div class="col-lg-12">
                     <div class="row">
                         @foreach($category_videos as $key => $categories)
+                            <div class="col-12">
+                                <h4 class="gen-heading-title">{{ $category_videos[$key][0]->category->category }}</h4>
+                            </div>
+
                             @foreach($categories as $cat_video)
                                 <div class="col-xl-3 col-lg-4 col-md-6">
                                     <div class="gen-carousel-movies-style-1 movie-grid style-1">
                                         <div class="gen-movie-contain">
                                             <div class="gen-movie-img">
                                                 <img src="{{ $cat_video->cover_path }}" alt="{{ $cat_video->slug }}">
-                                                <div class="gen-movie-add">
+                                                <!-- <div class="gen-movie-add">
                                                     <div class="wpulike wpulike-heart ">
                                                         <div class="wp_ulike_general_class">
                                                             <a href="#" class="sl-button"><i class="far fa-heart"></i></a>
                                                         </div>
                                                     </div>
-                                                    <!-- <ul class="menu bottomRight">
+                                                    <ul class="menu bottomRight">
                                                         <li class="share top">
                                                             <i class="fa fa-share-alt"></i>
                                                             <ul class="submenu">
@@ -195,8 +200,8 @@
                                                                             class="fab fa-twitter"></i></a></li>
                                                             </ul>
                                                         </li>
-                                                    </ul> -->
-                                                    <!-- <div class="movie-actions--link_add-to-playlist dropdown">
+                                                    </ul>
+                                                    <div class="movie-actions--link_add-to-playlist dropdown">
                                                         <a class="dropdown-toggle" href="#"><i class="fa fa-plus"></i></a>
                                                         <div class="dropdown-menu mCustomScrollbar">
                                                             <div class="mCustomScrollBox">
@@ -206,10 +211,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> -->
-                                                </div>
+                                                    </div>
+                                                </div> -->
                                                 <div class="gen-movie-action">
-                                                    <a href="single-movie.html" class="gen-button">
+                                                    <a href="{{ route('video', $cat_video->slug) }}" class="gen-button">
                                                         <i class="fa fa-play"></i>
                                                     </a>
                                                 </div>
@@ -217,7 +222,7 @@
                                             <div class="gen-info-contain">
                                                 <div class="gen-movie-info">
                                                     <h3>
-                                                        <a href="single-movie.html">{{ $cat_video->title }}</a>
+                                                        <a href="{{ route('video', $cat_video->slug) }}">{{ $cat_video->title }}</a>
                                                     </h3>
                                                 </div>
                                                 <div class="gen-movie-meta-holder">
@@ -235,7 +240,7 @@
                             @endforeach
 
                             <!-- Pagination -->
-                            <div class="col-lg-12 col-md-12 mb-3">
+                            <div class="col-lg-12 col-md-12 mb-5">
                                 <div class="gen-pagination">
                                     <nav aria-label="Page navigation">
                                         <ul class="page-numbers">
