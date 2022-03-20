@@ -120,4 +120,76 @@
         </div>
     </section>
     <!-- Action Movies -->
+
+    <!-- promotions Start -->
+    <section class="pt-0 pb-0 mb-4 gen-section-padding-2 home-singal-silder">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <h4 class="gen-heading-title">Promotions</h4>
+                </div>
+
+                <div class="col-12">
+                    <div class="gen-banner-movies">
+                        <div class="owl-carousel owl-loaded owl-drag" data-dots="true" data-nav="false"
+                            data-desk_num="1" data-lap_num="1" data-tab_num="1" data-mob_num="1" data-mob_sm="1"
+                            data-autoplay="true" data-loop="true" data-margin="30" data-video="true">
+
+                            @foreach($promotions as $promo)
+                                @if ($filetype($promo->material))
+                                    <div class="item" style="background: url('{{ $promo->material_path }}')">
+                                @else
+                                    <div class="item">
+                                        <video class="owl-video-frame" controls>
+                                            <source src="{{ $promo->material_path }}" type="video/mp4">
+                                        </video>
+                                @endif
+                                <div class="gen-movie-contain h-100">
+                                    <div class="container h-100">
+                                        <div class="row align-items-center h-100">
+                                            <div class="col-xl-6">
+                                                @if ($current_time->diffInHours($promo->created_at) < 120 )
+                                                <div class="gen-tag-line">
+                                                    <span>New Realease</span>
+                                                </div>
+                                                @endif
+                                                <div class="gen-movie-info">
+                                                    <h3>{{ $promo->title }}</h3>
+                                                </div>
+                                                <div class="gen-movie-meta-holder">
+                                                    <ul>
+                                                        <li>{{ $promo->created_at->format('M Y') }}</li>
+                                                        <li><a href="#"><span>ads</span></a></li>
+                                                    </ul>
+                                                    <p>
+                                                        Earners View ads.
+                                                    </p>
+                                                </div>
+                                                <div class="gen-movie-action">
+                                                    <!-- <div class="gen-btn-container button-1">
+                                                        <a href="single-movie.html" class="gen-button">
+                                                            <i aria-hidden="true" class="ion ion-play"></i> 
+                                                            <span class="text">Play now</span>
+                                                        </a>
+                                                    </div> -->
+                                                    <!-- <div class="gen-btn-container button-2">
+                                                        <a href="https://www.youtube.com/watch?v=hG4lT4fxj8M"
+                                                            class="gen-button popup-youtube popup-vimeo popup-gmaps gen-button-link">
+                                                            <span class="text">Watch Trailer</span>
+                                                        </a>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- promotions End -->
 @endsection

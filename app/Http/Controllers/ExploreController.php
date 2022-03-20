@@ -58,30 +58,64 @@ class ExploreController extends Controller
         $data['category'] = $category;
         $data['videos'] = Video::where('category_id', $category->id)
         ->where('status', '1')->orderby('created_at', 'desc')->get();
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['current_time'] = Carbon::now();
         return view('category', $data);
     }
 
     public function standards()
     {
         $data['page_title'] = 'How it works';
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['current_time'] = Carbon::now();
         return view('how-it-works', $data);
     }
 
     public function faq()
     {
         $data['page_title'] = 'FAQ';
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['current_time'] = Carbon::now();
         return view('faq', $data);
     }
 
     public function contact()
     {
         $data['page_title'] = 'Contact';
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['current_time'] = Carbon::now();
         return view('contact', $data);
     }
     
     public function video(Video $video)
     {
         $data['page_title'] = $video->title;
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['promotions'] = Promotion::where('status', '1')->get();
         $data['video'] = $video ?? 0;
         $data['views'] = VideoLog::where('video_id', $video->id)->count();
         $data['latest_videos'] = Video::where('category_id', $video->category_id)
@@ -94,6 +128,7 @@ class ExploreController extends Controller
             $data['subscription'] = is_null($user->membership);
 
             $data['watched_count'] = VideoLog::where('user_id', $user->id)->whereDate('created_at', Carbon::today())->count();
+            $data['is_watched'] = VideoLog::where('user_id', $user->id)->where('video_id', $video->id)->count();
 
             // subscribed users max videos
             $data['max_videos'] = Setting::where('slug', 'max_videos')->first()->meta;
@@ -101,11 +136,11 @@ class ExploreController extends Controller
             // non subscribed users max videos
             $data['max_videos_ns'] = Setting::where('slug', 'max_videos_ns')->first()->meta;
 
-            // echo '<pre>' . var_export('yes' , true) . '</pre>';
+            // echo '<pre>' . var_export($data['is_watched'], true) . '</pre>';
             
-            if (!$data['subscription'] && ($data['watched_count'] >= $data['max_videos'])) { // subscription exists
+            if (!$data['is_watched'] && !$data['subscription'] && ($data['watched_count'] >= $data['max_videos'])) { // subscription exists
                 return redirect()->back()->with('sub_user', 'Maximum numbers of videos watched Today');
-            } elseif ($data['subscription'] && ($data['watched_count'] >= $data['max_videos_ns'])) {
+            } elseif (!$data['is_watched'] && $data['subscription'] && ($data['watched_count'] >= $data['max_videos_ns'])) {
                 return redirect()->back()->with('info', 'Maximum numbers of videos watched Today, Subscribe now to watch more');
             }
         }
@@ -126,6 +161,7 @@ class ExploreController extends Controller
             }
             return $earnings['earnable'] - ($earnings['earnable'] * $data['tax']);
         };
+        $data['current_time'] = Carbon::now();
         return view('video', $data);
     }
 }

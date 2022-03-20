@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Library\Facades\FlutterwaveFacade;
 use App\Models\Membership;
 use App\Models\Payout;
+use App\Models\Promotion;
 use App\Models\Referral;
 use App\Models\Setting;
 use App\Models\Transaction;
@@ -22,6 +23,13 @@ class UserController extends Controller
     public function profile()
     {
         $data['page_title'] = 'User Profile';
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['current_time'] = Carbon::now();
         return view('user.dashboard.profile', $data);
     }
 
@@ -51,6 +59,13 @@ class UserController extends Controller
     public function account()
     {
         $data['page_title'] = 'Edit Account';
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['current_time'] = Carbon::now();
         return view('user.dashboard.account', $data);
     }
 
@@ -76,6 +91,13 @@ class UserController extends Controller
     public function settings()
     {
         $data['page_title'] = 'Settings';
+        $data['filetype'] = function($filename) {
+            $file_array = explode('.', $filename);
+            $ext = strtolower(array_pop($file_array));
+            return in_array($ext, ['jpeg','png','jpg','gif','svg']) ? true : false;
+        };
+        $data['promotions'] = Promotion::where('status', '1')->get();
+        $data['current_time'] = Carbon::now();
         return view('user.dashboard.settings', $data);
     }
 
