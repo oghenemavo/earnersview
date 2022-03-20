@@ -16,7 +16,7 @@ class ExploreController extends Controller
     {
         $data['page_title'] = 'Home - Earner\'s View';
         $data['slider'] = Video::where('status', '1')->orderBy('created_at', 'desc')->limit(1)->get();
-        $data['feed'] = Video::where('status', '1')->get();
+        $data['feed'] = Video::where('status', '1')->limit(5)->get();
         $data['promotions'] = Promotion::where('status', '1')->get();
         $data['current_time'] = Carbon::now();
         $data['duration'] = function($seconds) {
