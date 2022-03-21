@@ -135,25 +135,48 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="form-label-group">
-                        <label class="form-label" for="earnable">Earnable</label>
-                    </div>
-                    <div class="form-control-wrap">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">&#8358;</span>
+                        <div class="form-label-group">
+                            <label class="form-label" for="earnable">Earnable (Subscribers)</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">&#8358;</span>
+                                </div>
+                                <input type="number" class="form-control form-control-lg  @error('earnable') is-invalid @enderror"
+                                id="earnable" name="earnable" value="{{ $video->earnable }}" min="1" step="0.01">
+                                
+                                @error('earnable')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <input type="number" class="form-control form-control-lg  @error('earnable') is-invalid @enderror"
-                            id="earnable" name="earnable" value="{{ $video->earnable }}" min="1" step="0.01">
-                            
-                            @error('earnable')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="form-note">Earnable Value for Subscribed Users</div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="earnable">Earnable (Non Subscribers)</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">&#8358;</span>
+                                </div>
+                                <input type="number" class="form-control form-control-lg  @error('earnable_ns') is-invalid @enderror"
+                                id="earnable_ns" name="earnable_ns" value="{{ $video->earnable_ns }}" min="1" step="0.01">
+                                
+                                @error('earnable_ns')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-note">Earnable Value for <b>Non</b> Subscribed Users</div>
+                        </div>
+                    </div>
 
                 <div class="form-group">
                     <div class="form-label-group">

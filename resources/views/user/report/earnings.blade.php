@@ -76,7 +76,7 @@
                                     <div class="item" style="background: url('{{ $promo->material_path }}')">
                                 @else
                                     <div class="item">
-                                        <video class="owl-video-frame" controls>
+                                        <video class="owl-video-frame" controls autoplay>
                                             <source src="{{ $promo->material_path }}" type="video/mp4">
                                         </video>
                                 @endif

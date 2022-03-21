@@ -97,13 +97,13 @@
                     minlength: 4,
                 },
                 material: {
-                    accept: "image/*",
-                    filesize: 10,
+                    accept: "image/*,video/*",
+                    filesize: 30,
                 },
             },
             messages: {
                 material: {
-                    accept: 'Only Images file formats are accepted',
+                    accept: 'Only Images and Videos file formats are accepted',
                 }
             },
         });

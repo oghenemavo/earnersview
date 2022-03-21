@@ -367,7 +367,7 @@
                 material: {
                     required: true,
                     accept: "image/*,video/*",
-                    filesize: 10,
+                    filesize: 30,
                 },
             },
             messages: {
