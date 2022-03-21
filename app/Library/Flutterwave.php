@@ -167,6 +167,33 @@ class Flutterwave
             }
         }
     }
+    
+    public function check_transfer($transaction_id)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.flutterwave.com/v3/transfers/{$transaction_id}",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: application/json",
+                "Authorization: Bearer " . $this->_key,
+            ),
+        ));
+        
+        $response = curl_exec($curl);
+        
+        curl_close($curl);
+        
+        $result = json_decode($response);
+
+        return $result;
+    }
 
     public function verifyTransaction($transaction_id) {
         $query = ['SECKEY' =>  $this->_key, 'txref'=> $transaction_id];
@@ -202,8 +229,8 @@ class Flutterwave
     {
         //* Prepare our rave request
         $request = [
-            "account_bank" => "044",
-            "account_number" => "0690000031",
+            "account_bank" => $data->user->bank_code,
+            "account_number" => $data->user->bank_account,
             "amount" => $data->amount,
             "narration" => "Video Payout",
             "currency" => "NGN",

@@ -45,13 +45,11 @@ class ProcessTransfer extends Command
             $result = FlutterwaveFacade::transfers($data);
             if (is_object($result)) {
                 if (property_exists($result, 'id')) {
-                    $data->update(['receipt_no' => $result->id]);
+                    $data->update(['receipt_no' => $result->id, 'attempts' => '1']);
                     // Transfer::where('reference', $result->reference)->update(['receipt_no' => $result->id]);
                 }
             }
         }
-        
-        return $this->info('All pending transfers');
-        // return Command::SUCCESS;
+        return $this->info('All pending transfers made');
     }
 }

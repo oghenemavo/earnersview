@@ -16,6 +16,7 @@ class Payout extends Model
         'amount',
         'reference',
         'status',
+        'message',
         'is_notified',
         'attempts',
     ];
