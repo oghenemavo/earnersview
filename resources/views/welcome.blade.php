@@ -44,13 +44,6 @@
                                                                 <span class="text">Play Now</span>
                                                             </a>
                                                         </div>
-                                                        <div class="gen-btn-container button-2">
-                                                            <a href="{{ route('video', $video->slug) }}"
-                                                                class="gen-button gen-button-link">
-                                                                <i aria-hidden="true" class="ion ion-play"></i> 
-                                                                <span class="text">Watch Trailer</span>
-                                                            </a>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

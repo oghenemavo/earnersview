@@ -26,12 +26,12 @@
                                 <h2 class="gen-title">{{ $video->title }}</h2>
                                 <div class="gen-single-meta-holder">
                                     <ul>
-                                        <li>&#8358;{{ $earning(['earnable' => $video->earnable, 'earnable_ns' => $video->earnable_ns]) }}</li>
+                                        <!-- <li>&#8358;{{ $earning(['earnable' => $video->earnable, 'earnable_ns' => $video->earnable_ns]) }}</li> -->
                                         <li>{{ $duration($video->length) }} mins</li>
                                         <li>{{ $video->created_at->diffForHumans() }}</li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="#"><span>{{ $video->category->category }}</span></a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <i class="fas fa-eye"></i>
                                             <span>{{ $views }} Views</span>
