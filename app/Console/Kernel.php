@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         Commands\ProcessTransfer::class,
         Commands\VerifyPayout::class,
         Commands\CreditWallet::class,
+        Commands\CreditReferrerWallet::class,
     ];
 
     /**
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('process:transfer')->everyMinute();
         $schedule->command('verify:payout')->everyTenMinutes();
         $schedule->command('credit:wallet')->everyMinute();
+        $schedule->command('credit_referrer:wallet')->everyTenMinutes();
     }
 
     /**

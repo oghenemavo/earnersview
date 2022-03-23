@@ -48,7 +48,7 @@ class ReportController extends Controller
 
                     $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00';
 
-                    $refer_info->bonus = $bonus * $tax;
+                    $refer_info->bonus = $bonus * ($tax * 0.01);
                     $refer_info->tax = $tax;
                     $refer_info->amount = $bonus;
                     $refer_info->status = '1';

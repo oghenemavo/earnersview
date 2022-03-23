@@ -24,6 +24,7 @@
                             <th class="nk-tb-col tb-col-mb">Receipt No.</th>
                             <th class="nk-tb-col tb-col-mb">Amount</th>
                             <th class="nk-tb-col tb-col-mb">Status</th>
+                            <th class="nk-tb-col tb-col-mb">Message</th>
                             <th class="nk-tb-col tb-col-mb">Created at</th>
                         </tr>
                     </thead>
@@ -86,6 +87,7 @@
                             return activity;
                         } 
                     },
+                    { data : 'message', className : 'nk-tb-col tb-col-md' },
                     { 
                         data        : 'created_at', className   : 'nk-tb-col tb-col-lg',
                         render      : function (data) {

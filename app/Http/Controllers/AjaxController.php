@@ -175,6 +175,7 @@ class AjaxController extends Controller
             $data['amount'] = $item->amount;
             $data['reference'] = $item->reference;
             $data['status'] = $item->status;
+            $data['message'] = $item->message;
             $data['is_notified'] = $item->is_notified;
             $data['attempts'] = $item->attempts;
             $data['created_at'] = $item->created_at;

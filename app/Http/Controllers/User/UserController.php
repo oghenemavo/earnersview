@@ -172,11 +172,11 @@ class UserController extends Controller
                 $refer_info = Referral::where('referred_user_id', $user_id)->first();
                 if ($refer_info) {
                     $bonus_percent = Setting::where('slug', 'referral_percentage')->first()->meta;
-                    $bonus = $total_amount * ($bonus_percent * 0.01);
+                    $bonus = $total_amount * ($bonus_percent / 100);
 
                     $tax = Setting::where('slug', 'payout_tax_percentage')->first()->meta ?? '0.00';
 
-                    $refer_info->bonus = $bonus * $tax;
+                    $refer_info->bonus = $bonus * ($tax / 100);
                     $refer_info->tax = $tax;
                     $refer_info->amount = $bonus;
                     $refer_info->status = '1';

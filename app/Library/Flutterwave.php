@@ -73,7 +73,7 @@ class Flutterwave
             ],
             'customizations' => [
                 'title' => 'Earners View Membership',
-                'description' => 'sample',
+                'description' => 'Subscription',
                 'logo' => asset('images/earners-logo.png'),
             ]
         ];
