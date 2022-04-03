@@ -84,7 +84,9 @@
                             data-autoplay="false" data-loop="false" data-margin="30">
 
                             @foreach($feed as $video)
-                            <div class="item">
+                            <div class="item" style="position: relative;">
+                                <img src="{{ asset('images/earners-logo.png') }}" style="width:40px; position:absolute; z-index: 999;">
+
                                 <div class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
                                     <div class="gen-carousel-movies-style-3 movie-grid style-3">
                                         <div class="gen-movie-contain">
