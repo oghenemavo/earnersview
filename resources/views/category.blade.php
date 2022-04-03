@@ -39,6 +39,8 @@
             <!-- notifications alert -->
 
 
+            <!-- <div class="item" style="position: relative;">
+                                <img src="{{ asset('images/earners-logo.png') }}" style="width:40px; position:absolute; z-index: 999;"> -->
 
             <div class="row">
                 <div class="col-lg-12">
@@ -46,9 +48,11 @@
                         @foreach($videos as $video)
                             <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="gen-carousel-movies-style-3 movie-grid style-3">
-                                    <div class="gen-movie-contain">
+                                    <div class="gen-movie-contain" style="position: relative;">
+                                        <img src="{{ asset('images/earners-logo.png') }}" style="width:40px; position:absolute; z-index: 999;">
                                         <div class="gen-movie-img">
-                                            <img src="{{ $video->cover_path }}" alt="single-video-image">
+                                            <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image">
+                                            <!-- <img src="{{ $video->cover_path }}" alt="single-video-image"> -->
                                             <div class="gen-movie-add">
                                                 <div class="wpulike wpulike-heart">
                                                     <div class="wp_ulike_general_class">

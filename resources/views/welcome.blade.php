@@ -91,7 +91,8 @@
                                     <div class="gen-carousel-movies-style-3 movie-grid style-3">
                                         <div class="gen-movie-contain">
                                             <div class="gen-movie-img">
-                                                <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image">
+                                                <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image">
+                                                <!-- <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image"> -->
                                                 <div class="gen-movie-add">
                                                     <div class="wpulike wpulike-heart">
                                                         <div class="wp_ulike_general_class wp_ulike_is_not_liked">
@@ -182,12 +183,14 @@
                             data-autoplay="false" data-loop="false" data-margin="30">
 
                             @foreach($categories as $video)
-                            <div class="item">
+                            <div class="item" style="position: relative;">
+                                <img src="{{ asset('images/earners-logo.png') }}" style="width:40px; position:absolute; z-index: 999;">
                                 <div class="movie type-movie status-publish has-post-thumbnail hentry movie_genre-action movie_genre-adventure movie_genre-drama">
                                     <div class="gen-carousel-movies-style-3 movie-grid style-3">
                                         <div class="gen-movie-contain">
                                             <div class="gen-movie-img">
-                                                <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image">
+                                                <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image">
+                                                <!-- <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image"> -->
                                                 <div class="gen-movie-add">
                                                     <div class="wpulike wpulike-heart">
                                                         <div class="wp_ulike_general_class wp_ulike_is_not_liked">
