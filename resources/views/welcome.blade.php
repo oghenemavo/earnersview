@@ -91,8 +91,8 @@
                                     <div class="gen-carousel-movies-style-3 movie-grid style-3">
                                         <div class="gen-movie-contain">
                                             <div class="gen-movie-img">
-                                                <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image">
-                                                <!-- <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image"> -->
+                                                <!-- <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image"> -->
+                                                <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image">
                                                 <div class="gen-movie-add">
                                                     <div class="wpulike wpulike-heart">
                                                         <div class="wp_ulike_general_class wp_ulike_is_not_liked">
@@ -189,8 +189,8 @@
                                     <div class="gen-carousel-movies-style-3 movie-grid style-3">
                                         <div class="gen-movie-contain">
                                             <div class="gen-movie-img">
-                                                <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image">
-                                                <!-- <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image"> -->
+                                                <!-- <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image"> -->
+                                                <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;" alt="owl-carousel-video-image">
                                                 <div class="gen-movie-add">
                                                     <div class="wpulike wpulike-heart">
                                                         <div class="wp_ulike_general_class wp_ulike_is_not_liked">

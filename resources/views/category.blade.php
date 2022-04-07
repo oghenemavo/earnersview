@@ -51,8 +51,8 @@
                                     <div class="gen-movie-contain" style="position: relative;">
                                         <img src="{{ asset('images/earners-logo.png') }}" style="width:40px; position:absolute; z-index: 999;">
                                         <div class="gen-movie-img">
-                                            <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image">
-                                            <!-- <img src="{{ $video->cover_path }}" alt="single-video-image"> -->
+                                            <!-- <img src="{{ asset('app/images/black.jpg') }}"  alt="owl-carousel-video-image"> -->
+                                            <img src="{{ $video->cover_path }}" style="width: 312px; height: 207px; object-fit:cover;"  alt="single-video-image">
                                             <div class="gen-movie-add">
                                                 <div class="wpulike wpulike-heart">
                                                     <div class="wp_ulike_general_class">
