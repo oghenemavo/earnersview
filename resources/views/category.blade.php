@@ -67,9 +67,8 @@
                                                         <ul class="submenu">
                                                             <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
                                                             </li>
-                                                            <li><a href="#" class="facebook"><i class="fab fa-instagram"></i></a>
-                                                            </li>
-                                                            <li><a href="#" class="facebook"><i class="fab fa-twitter"></i></a></li>
+                                                                <li><a href="https://www.instagram.com/earnerview_tv/" class="facebook"><i class="fab fa-instagram"></i></a></li>
+                                                                <li><a href="https://twitter.com/Earnerviewtv" class="facebook"><i class="fab fa-twitter"></i></a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
